@@ -2,13 +2,14 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem; // Import the InputSystem namespace
-[RequireComponent(typeof(Rigidbody2D))] // Require a Rigidbody2D component on the GameObject
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections))] // Require a Rigidbody2D component on the GameObject
 public class Playercontroller : MonoBehaviour
 {
     Rigidbody2D rb;
-
+    TouchingDirections touchingDirections; 
     
     public float walkSpeed = 5f;
+    public float jumpImpulse;
     public float runSpeed = 10f; // Variable to store the speed of the player when running
     [SerializeField] 
     private bool _isMoving = false; // Variable to track if the player is moving
@@ -69,7 +70,8 @@ public class Playercontroller : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>(); // Get the Animator component attached to the GameObject
+        animator = GetComponent<Animator>(); 
+        touchingDirections = GetComponent<TouchingDirections>(); 
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -86,6 +88,8 @@ public class Playercontroller : MonoBehaviour
     void FixedUpdate()
     {
         rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y); // Set the horizontal velocity based on input and walk speed   
+
+        animator.SetFloat(AnimationStrings.yVelocity, rb.linearVelocity.y); //makes the character fall/rise
 
     }
 
@@ -123,4 +127,14 @@ public class Playercontroller : MonoBehaviour
             IsRunning = false; 
         }
     }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        //TODO check if alive as well
+        if (context.started && touchingDirections.IsGrounded)
+        {
+            animator.SetTrigger(AnimationStrings.jump);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulse);
+        } 
+}
 }
