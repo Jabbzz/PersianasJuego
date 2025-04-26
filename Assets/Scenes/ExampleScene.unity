@@ -125,7 +125,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1506562925}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2388434359137948043, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2963,7 +2963,6 @@ Transform:
   - {fileID: 1030100273}
   - {fileID: 2030810896}
   - {fileID: 1051155721}
-  - {fileID: 1721620811}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1721620811 stripped
@@ -3128,3 +3127,4 @@ SceneRoots:
   - {fileID: 1506562925}
   - {fileID: 1484451096}
   - {fileID: 2109838038}
+  - {fileID: 423753395}

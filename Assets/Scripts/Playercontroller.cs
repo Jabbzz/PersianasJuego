@@ -9,7 +9,8 @@ public class Playercontroller : MonoBehaviour
     TouchingDirections touchingDirections; 
     
     public float walkSpeed = 5f;
-    public float jumpImpulse;
+    public float airWalkSpeed = 3f;
+    public float jumpImpulse = 10f; 
     public float runSpeed = 10f; // Variable to store the speed of the player when running
     [SerializeField] 
     private bool _isMoving = false; // Variable to track if the player is moving
@@ -36,16 +37,25 @@ public class Playercontroller : MonoBehaviour
 
     public float CurrentMoveSpeed { get
         {
-            if (IsMoving)
+            if (IsMoving && !touchingDirections.IsOnWall)
             {
-                if(IsRunning)
+                if (touchingDirections.IsGrounded)
                 {
-                    return runSpeed; 
+                    //ground state checks
+                    if (IsRunning)
+                    {
+                        return runSpeed; 
+                    }
+                    else
+                    {
+                        return walkSpeed; 
+                    }
                 }
                 else
                 {
-                    return walkSpeed; 
+                    return airWalkSpeed; 
                 }
+                
             }
             else
             {
