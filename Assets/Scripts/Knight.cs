@@ -10,7 +10,8 @@ public class Knight : MonoBehaviour
     public enum WalkableDirection { Right, Left}
 
     private WalkableDirection _walkDirection;
-    private Vector2 walkDirectionVector = Vector2.right;
+    private Vector2 walkDirectionVector = Vector2.left;
+    
 
     public WalkableDirection WalkDirection
     {
@@ -19,14 +20,15 @@ public class Knight : MonoBehaviour
             if (_walkDirection != value)
             {
                 //directions flipped
+                //nota: las direcciones son invertidas porque el sprite del caballero mira a la izquierda
                 gameObject.transform.localScale = new Vector2(gameObject.transform.localScale.x * -1, gameObject.transform.localScale.y);
                 if (value == WalkableDirection.Right)
                 {
-                    walkDirectionVector = Vector2.right;
+                    walkDirectionVector = Vector2.left;
                 }
                 else if (value == WalkableDirection.Left)
                 {
-                    walkDirectionVector = Vector2.left;
+                    walkDirectionVector = Vector2.right;
                 }
             }
             
