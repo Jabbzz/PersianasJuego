@@ -37,29 +37,38 @@ public class Playercontroller : MonoBehaviour
 
     public float CurrentMoveSpeed { get
         {
-            if (IsMoving && !touchingDirections.IsOnWall)
+            if (CanMove)
             {
-                if (touchingDirections.IsGrounded)
+                if (IsMoving && !touchingDirections.IsOnWall)
                 {
-                    //ground state checks
-                    if (IsRunning)
+                    if (touchingDirections.IsGrounded)
                     {
-                        return runSpeed; 
+                        //ground state checks
+                        if (IsRunning)
+                        {
+                            return runSpeed; 
+                        }
+                        else
+                        {
+                            return walkSpeed; 
+                        }
                     }
                     else
                     {
-                        return walkSpeed; 
+                        return airWalkSpeed; 
                     }
+                    
                 }
                 else
                 {
-                    return airWalkSpeed; 
+                    return 0f; // Return 0 if not moving
                 }
-                
+
             }
-            else
+            else 
             {
-                return 0f; // Return 0 if not moving
+                //movement Locked
+                return 0f;
             }
         } }
 
@@ -73,6 +82,11 @@ public class Playercontroller : MonoBehaviour
         }
         _isFacingRight = value; 
     } }
+
+    public bool CanMove{ get
+        {
+            return animator.GetBool(AnimationStrings.canMove); 
+        }}
 
     Vector2 moveInput; // Variable to store the movement input
     Animator animator; // Variable to store the Animator component
@@ -98,7 +112,6 @@ public class Playercontroller : MonoBehaviour
     void FixedUpdate()
     {
         rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y); // Set the horizontal velocity based on input and walk speed   
-
         animator.SetFloat(AnimationStrings.yVelocity, rb.linearVelocity.y); //makes the character fall/rise
 
     }
@@ -141,10 +154,17 @@ public class Playercontroller : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         //TODO check if alive as well
-        if (context.started && touchingDirections.IsGrounded)
+        if (context.started && touchingDirections.IsGrounded && CanMove)
         {
-            animator.SetTrigger(AnimationStrings.jump);
+            animator.SetTrigger(AnimationStrings.jumpTrigger);
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulse);
         } 
 }
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            animator.SetTrigger(AnimationStrings.attackTrigger);
+        }
+    }
 }
