@@ -88,6 +88,11 @@ public class Playercontroller : MonoBehaviour
             return animator.GetBool(AnimationStrings.canMove); 
         }}
 
+    public bool IsAlive { get
+        {
+            return animator.GetBool(AnimationStrings.isAlive); 
+        } }
+
     Vector2 moveInput; // Variable to store the movement input
     Animator animator; // Variable to store the Animator component
 
@@ -119,10 +124,12 @@ public class Playercontroller : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
+        if(IsAlive)
+        {
+            IsMoving = moveInput != Vector2.zero;
 
-        IsMoving = moveInput != Vector2.zero;
-
-        SetFacingDirection(moveInput);
+            SetFacingDirection(moveInput);
+        }
     }
 
     private void SetFacingDirection(Vector2 moveInput)
