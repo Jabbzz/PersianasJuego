@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem; // Import the InputSystem namespace
-[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections))] // Require a Rigidbody2D component on the GameObject
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections)),] // Require a Rigidbody2D component on the GameObject
 public class Playercontroller : MonoBehaviour
 {
     Rigidbody2D rb;
@@ -93,6 +93,11 @@ public class Playercontroller : MonoBehaviour
             return animator.GetBool(AnimationStrings.isAlive); 
         } }
 
+    public bool LockVelocity { get
+    {
+        return animator.GetBool(AnimationStrings.lockVelocity);
+            }}
+
     Vector2 moveInput; // Variable to store the movement input
     Animator animator; // Variable to store the Animator component
 
@@ -116,7 +121,8 @@ public class Playercontroller : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y); // Set the horizontal velocity based on input and walk speed   
+        if (!LockVelocity)
+            rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
         animator.SetFloat(AnimationStrings.yVelocity, rb.linearVelocity.y); //makes the character fall/rise
 
     }
@@ -173,5 +179,11 @@ public class Playercontroller : MonoBehaviour
         {
             animator.SetTrigger(AnimationStrings.attackTrigger);
         }
+    }
+
+
+    public void OnHit(int damage, Vector2 knockback)
+    {
+        rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
     }
 }
