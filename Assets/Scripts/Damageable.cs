@@ -37,6 +37,17 @@ public class Damageable : MonoBehaviour
             }
         }
     }
+    //la velocidad no se debe cambiar mientras esa condicion es true pero necesita ser respetada por
+    //otros componentes como player controller
+    public bool LockVelocity { get
+    {
+        return animator.GetBool(AnimationStrings.lockVelocity);
+            }
+            private set
+            {
+                animator.SetBool(AnimationStrings.lockVelocity, value);
+            }}
+
 
     public void Awake()
     {
@@ -71,6 +82,7 @@ public class Damageable : MonoBehaviour
             isInvincible = true;
 
             animator.SetTrigger(AnimationStrings.hitTrigger);
+            LockVelocity = true;
             //Notify other components that the damageable was hit to handle knockback
             damageableHit?.Invoke(damage, knockback);
 

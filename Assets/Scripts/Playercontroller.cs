@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem; // Import the InputSystem namespace
-[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections)),] // Require a Rigidbody2D component on the GameObject
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections), typeof(Damageable)),] // Require a Rigidbody2D component on the GameObject
 public class Playercontroller : MonoBehaviour
 {
     Rigidbody2D rb;
@@ -11,6 +11,7 @@ public class Playercontroller : MonoBehaviour
     public float walkSpeed = 5f;
     public float airWalkSpeed = 3f;
     public float jumpImpulse = 10f; 
+    Damageable damageable; 
     public float runSpeed = 10f; // Variable to store the speed of the player when running
     [SerializeField] 
     private bool _isMoving = false; // Variable to track if the player is moving
@@ -93,11 +94,7 @@ public class Playercontroller : MonoBehaviour
             return animator.GetBool(AnimationStrings.isAlive); 
         } }
 
-    public bool LockVelocity { get
-    {
-        return animator.GetBool(AnimationStrings.lockVelocity);
-            }}
-
+    
     Vector2 moveInput; // Variable to store the movement input
     Animator animator; // Variable to store the Animator component
 
@@ -106,6 +103,7 @@ public class Playercontroller : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>(); 
         touchingDirections = GetComponent<TouchingDirections>(); 
+        damageable = GetComponent<Damageable>();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -121,7 +119,7 @@ public class Playercontroller : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!LockVelocity)
+        if (!damageable.LockVelocity)
             rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
         animator.SetFloat(AnimationStrings.yVelocity, rb.linearVelocity.y); //makes the character fall/rise
 

@@ -28,7 +28,9 @@ public class Attack : MonoBehaviour
 
         if (damageable != null)
         {
-            bool GotHit = damageable.Hit(attackDamage, knockback);
+            float direction = Mathf.Sign(collision.transform.position.x - transform.position.x);
+            Vector2 deliveredKnockback = new Vector2(knockback.x * direction, knockback.y);
+            bool GotHit = damageable.Hit(attackDamage, deliveredKnockback);
             if(GotHit)
                 Debug.Log(collision.name + "hit for " + attackDamage);
         }
