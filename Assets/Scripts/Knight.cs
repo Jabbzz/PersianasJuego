@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections),typeof(Damageable))]
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections), typeof(Damageable))]
 public class Knight : MonoBehaviour
 {
 
@@ -10,19 +10,20 @@ public class Knight : MonoBehaviour
     public DetectionZone attackZone;
     public DetectionZone cliffDectionZone;
     Rigidbody2D rb;
-    TouchingDirections touchingDirections; 
+    TouchingDirections touchingDirections;
     Animator animator;
 
-    public enum WalkableDirection { Right, Left}
+    public enum WalkableDirection { Right, Left }
 
     private WalkableDirection _walkDirection;
     private Vector2 walkDirectionVector = Vector2.left;
-    
+
 
     public WalkableDirection WalkDirection
     {
-        get {return _walkDirection;}
-        set {
+        get { return _walkDirection; }
+        set
+        {
             if (_walkDirection != value)
             {
                 //directions flipped
@@ -37,31 +38,42 @@ public class Knight : MonoBehaviour
                     walkDirectionVector = Vector2.right;
                 }
             }
-            
-            _walkDirection = value;}
+
+            _walkDirection = value;
+        }
     }
 
     public bool _hasTarget = false;
 
-    public bool HasTarget { get{
-        return _hasTarget;
-    } private set
+    public bool HasTarget
     {
-        _hasTarget = value;
-        animator.SetBool(AnimationStrings.hasTarget, value);
-    } }
+        get
+        {
+            return _hasTarget;
+        }
+        private set
+        {
+            _hasTarget = value;
+            animator.SetBool(AnimationStrings.hasTarget, value);
+        }
+    }
 
-    public float AttackCooldown { get
+    public float AttackCooldown
     {
-        return animator.GetFloat(AnimationStrings.attackCooldown);
-    } private set
-    {
-        animator.SetFloat(AnimationStrings.attackCooldown, Mathf.Max(value, 0));
-    } }
+        get
+        {
+            return animator.GetFloat(AnimationStrings.attackCooldown);
+        }
+        private set
+        {
+            animator.SetFloat(AnimationStrings.attackCooldown, Mathf.Max(value, 0));
+        }
+    }
 
     public bool CanMove
     {
-        get {
+        get
+        {
             return animator.GetBool(AnimationStrings.canMove);
         }
     }
@@ -73,27 +85,27 @@ public class Knight : MonoBehaviour
         damageable = GetComponent<Damageable>();
         damageable.damageableHit.AddListener(OnHit);
     }
-       // Update is called once per frame
+    // Update is called once per frame
     void Update()
     {
         HasTarget = attackZone.detectedColliders.Count > 0;
 
-        if(AttackCooldown > 0)
+        if (AttackCooldown > 0)
         {
             AttackCooldown -= Time.deltaTime;
-        }    
+        }
     }
 
 
     private void FixedUpdate()
     {
-        if(touchingDirections.IsOnWall && touchingDirections.IsGrounded || cliffDectionZone.detectedColliders.Count == 0)
+        if (touchingDirections.IsOnWall && touchingDirections.IsGrounded || cliffDectionZone.detectedColliders.Count == 0)
         {
             FlipDirection();
         }
-        if(!damageable.LockVelocity)
+        if (!damageable.LockVelocity)
         {
-            if(CanMove)
+            if (CanMove)
             {
                 rb.linearVelocity = new Vector2(walkSpeed * walkDirectionVector.x, rb.linearVelocity.y);
             }
@@ -102,7 +114,7 @@ public class Knight : MonoBehaviour
                 rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocity.x, 0, walkStopRate), rb.linearVelocity.y);
             }
         }
-        
+
     }
 
     private void FlipDirection()
@@ -115,7 +127,7 @@ public class Knight : MonoBehaviour
         {
             WalkDirection = WalkableDirection.Right;
         }
-        else 
+        else
         {
             Debug.Log("current Walk direction is not set to legal values of right or left");
         }
@@ -124,6 +136,14 @@ public class Knight : MonoBehaviour
     public void OnHit(int damage, Vector2 knockback)
     {
         rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
+    }
+
+    public void OnCliffDetected()
+    {
+        if (touchingDirections.IsGrounded)
+        {
+            FlipDirection();
+        }
     }
 
 }
