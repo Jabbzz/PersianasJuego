@@ -179,10 +179,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5089344963563600461, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
+      propertyPath: damageableHit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1721620820}
+    - target: {fileID: 5089344963563600461, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
+      propertyPath: damageableHit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Playercontroller2, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4738241158958306253, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1721620820}
+    - targetCorrespondingSourceObject: {fileID: 4738241158958306253, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1721620821}
   m_SourcePrefab: {fileID: 100100000, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
 --- !u!1 &519420028
 GameObject:
