@@ -70,9 +70,6 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
-Assets/Spritesheets_juls/run.png.meta
-Assets/Spritesheets_juls/jump.png.meta
-Assets/Spritesheets_juls/idle.png.meta
+
 .plastic/plastic.wktree
 .plastic/plastic.changes
-Assets/Spritesheets_juls/idle.png.meta
