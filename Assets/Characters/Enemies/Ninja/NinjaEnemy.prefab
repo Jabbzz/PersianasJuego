@@ -556,7 +556,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &3993182743886384808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -623,6 +623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkStopRate: 0.6
   walkSpeed: 3
+  stopDistance: 4
   attackZone: {fileID: 2833608234969790656}
   cliffDectionZone: {fileID: 7448244710064609005}
   chaseZone: {fileID: 9210107548561787582}
