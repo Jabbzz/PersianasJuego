@@ -149,6 +149,10 @@ MonoBehaviour:
   walkSpeed: 5
   airWalkSpeed: 9
   jumpImpulse: 7
+  dashSpeed: 0.5
+  dashDuration: 1
+  dashCooldown: 1
+  isDashing: 0
   isHanging: 0
   ledgeHangOffset: {x: -0.5, y: -0.5}
   ledgeDetectorTransform: {fileID: 116583193976640913}
@@ -222,10 +226,6 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 852140f2-7766-474d-8707-702459ba45f3
     m_ActionName: 'Player/Interact[/Keyboard/e,/DualSenseGamepadHID/buttonNorth]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 27c5f898-bc57-4ee1-8800-db469aca5fe3
-    m_ActionName: 'Player/Crouch[/DualSenseGamepadHID/buttonEast,/Keyboard/c]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4546717293111613786}
@@ -306,6 +306,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4546717293111613786}
+        m_TargetAssemblyTypeName: Playercontroller, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: dd963883-bf9e-4f21-a10f-f223f3e1a463
+    m_ActionName: 'Player/Dash[/DualSenseGamepadHID/buttonEast,/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
