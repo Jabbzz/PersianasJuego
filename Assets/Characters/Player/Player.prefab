@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2051885625725716386}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.39, y: 1.97, z: 0}
+  m_LocalPosition: {x: 1.45, y: 2.3, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -153,6 +153,7 @@ MonoBehaviour:
   dashDuration: 0.2
   dashCooldown: 1
   isDashing: 0
+  dashColor: {r: 0, g: 1, b: 0.8666667, a: 1}
   isHanging: 0
   ledgeHangOffset: {x: -0.5, y: -0.5}
   ledgeDetectorTransform: {fileID: 116583193976640913}

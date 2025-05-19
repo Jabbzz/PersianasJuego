@@ -254,8 +254,9 @@ public class Playercontroller : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         rb.gravityScale = 0;
 
-        // Snap to ledge position
-        Vector3 snapPos = ledgeDetector.transform.position + (Vector3)ledgeHangOffset;
+        // Snap to ledge position, accounting for facing direction
+        //
+        Vector3 snapPos = ledgeDetector.transform.position + new Vector3(ledgeHangOffset.x, ledgeHangOffset.y, 0f);
         transform.position = new Vector3(
             Mathf.Round(snapPos.x * 16) / 16f,
             Mathf.Round(snapPos.y * 16) / 16f,
@@ -332,4 +333,18 @@ public class Playercontroller : MonoBehaviour
         canDash = true;
     }
 
+    private void OnDrawGizmosSelected()
+{
+    if (ledgeDetectorTransform != null)
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(ledgeDetectorTransform.position, 0.05f);
+
+        // Show ledge snap position based on facing direction and offset
+        float direction = _isFacingRight ? 1f : -1f;
+        Vector3 snapPos = ledgeDetectorTransform.position + new Vector3(ledgeHangOffset.x * direction, ledgeHangOffset.y, 0f);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(snapPos, 0.05f);
+    }
+}
 }
