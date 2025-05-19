@@ -13,6 +13,18 @@ public class Playercontroller : MonoBehaviour
     public float airWalkSpeed = 3f;
     public float jumpImpulse = 10f;
 
+    [Header("Dash Settings")]
+    public float dashSpeed = 20f;
+    public float dashDuration = 0.2f;
+    public float dashCooldown = 1f;
+    public bool isDashing = false;
+    private bool canDash = true;
+    private SpriteRenderer spriteRenderer;
+    public Color dashColor = new Color(0f, 1f, 221f / 255f);
+    private Color originalColor;
+
+
+
     private LedgeDetector ledgeDetector;
     public bool isHanging = false;
     public Vector2 ledgeHangOffset = new Vector2(0f, -0.5f); // Adjust for pixel-perfect hang
@@ -146,6 +158,8 @@ public class Playercontroller : MonoBehaviour
         touchingDirections = GetComponent<TouchingDirections>();
         damageable = GetComponent<Damageable>();
         ledgeDetector = GetComponentInChildren<LedgeDetector>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalColor = spriteRenderer.color;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -170,7 +184,7 @@ public class Playercontroller : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!damageable.LockVelocity)
+        if (!damageable.LockVelocity && !isDashing)
             rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
         animator.SetFloat(AnimationStrings.yVelocity, rb.linearVelocity.y); //makes the character fall/rise
 
@@ -338,22 +352,43 @@ public class Playercontroller : MonoBehaviour
         );
     }
 
-    private void PlayFootstepSound()
+    public void OnDash(InputAction.CallbackContext context)
     {
-        AudioClip clipToPlay = IsRunning ? runSound : walkSound;
-        if (clipToPlay != null)
+        if (context.started && canDash && IsAlive && CanMove)
         {
-            audioManager.instance.PlaySound(clipToPlay);
+            StartCoroutine(Dash());
         }
-
-        StartCoroutine(FootstepCooldownRoutine());
     }
 
-    private IEnumerator FootstepCooldownRoutine()
+    private IEnumerator Dash()
     {
-        canPlayFootstep = false;
-        yield return new WaitForSeconds(footstepCooldown);
-        canPlayFootstep = true;
-    }
-}
+        isDashing = true;
+        canDash = false;
+        spriteRenderer.color = new Color(0f, 0.9f, 5f);
 
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0;
+
+        float dashDirection = isFacingRight ? 1f : -1f;
+        rb.linearVelocity = new Vector2(dashDirection * dashSpeed, 0f);
+
+        //slowing time
+        Time.timeScale = 0.5f;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+
+        yield return new WaitForSeconds(dashDuration);
+
+        rb.linearVelocity = Vector2.zero;
+        rb.gravityScale = originalGravity;
+        isDashing = false;
+
+        // Optional: reset time scale
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = 0.02f;
+        spriteRenderer.color = originalColor;
+
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
+    }
+
+}
