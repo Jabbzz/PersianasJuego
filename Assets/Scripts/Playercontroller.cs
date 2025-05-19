@@ -19,6 +19,10 @@ public class Playercontroller : MonoBehaviour
     public float dashCooldown = 1f;
     public bool isDashing = false;
     private bool canDash = true;
+    private SpriteRenderer spriteRenderer;
+    public Color dashColor = new Color(0f, 1f, 221f / 255f);
+    private Color originalColor;
+
 
 
     private LedgeDetector ledgeDetector;
@@ -141,6 +145,8 @@ public class Playercontroller : MonoBehaviour
         touchingDirections = GetComponent<TouchingDirections>();
         damageable = GetComponent<Damageable>();
         ledgeDetector = GetComponentInChildren<LedgeDetector>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalColor = spriteRenderer.color;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -299,6 +305,7 @@ public class Playercontroller : MonoBehaviour
     {
         isDashing = true;
         canDash = false;
+        spriteRenderer.color = new Color(0f, 0.9f, 5f);
 
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0;
@@ -319,6 +326,7 @@ public class Playercontroller : MonoBehaviour
         // Optional: reset time scale
         Time.timeScale = 1f;
         Time.fixedDeltaTime = 0.02f;
+        spriteRenderer.color = originalColor;
 
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
