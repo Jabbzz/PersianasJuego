@@ -1,11 +1,12 @@
 using System;
 using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections), typeof(Damageable))]
-public class Knight : MonoBehaviour
+public class Ninja: MonoBehaviour
 {
 
     public float walkStopRate = 0.6f;
     public float walkSpeed = 3f;
+    public float stopDistance = 4f;
     Damageable damageable;
     public DetectionZone attackZone;
     public DetectionZone cliffDectionZone;
@@ -36,11 +37,11 @@ public class Knight : MonoBehaviour
                 gameObject.transform.localScale = new Vector2(gameObject.transform.localScale.x * -1, gameObject.transform.localScale.y);
                 if (value == WalkableDirection.Right)
                 {
-                    walkDirectionVector = Vector2.left;
+                    walkDirectionVector = Vector2.right;
                 }
                 else if (value == WalkableDirection.Left)
                 {
-                    walkDirectionVector = Vector2.right;
+                    walkDirectionVector = Vector2.left;
                 }
             }
 
@@ -116,10 +117,11 @@ public class Knight : MonoBehaviour
             {
                 // Assume the first collider is the player
                 Transform player = chaseZone.detectedColliders[0].transform;
+                float distanceToPlayer = Mathf.Abs(player.position.x - transform.position.x);
                 float directionToPlayer = Mathf.Sign(player.position.x - transform.position.x);
 
                 // Determine which way the Knight is facing
-                float knightFacing = (WalkDirection == WalkableDirection.Left) ? 1f : -1f;
+                float knightFacing = (WalkDirection == WalkableDirection.Right) ? 1f : -1f;
 
                 // Check if player is behind
                 if (Mathf.Sign(directionToPlayer) != knightFacing)
@@ -147,7 +149,16 @@ public class Knight : MonoBehaviour
                     }
                 }
 
-                rb.linearVelocity = new Vector2(walkSpeed * directionToPlayer, rb.linearVelocity.y);
+                // Stop at mid-range distance
+                if (distanceToPlayer > stopDistance)
+                {
+                    rb.linearVelocity = new Vector2(walkSpeed * directionToPlayer, rb.linearVelocity.y);
+                }
+                else
+                {
+                    // Stop moving but keep facing the player
+                    rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+                }
             }
             else if (CanMove)
             {
