@@ -334,17 +334,18 @@ public class Playercontroller : MonoBehaviour
     }
 
     private void OnDrawGizmosSelected()
-{
-    if (ledgeDetectorTransform != null)
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawSphere(ledgeDetectorTransform.position, 0.05f);
+        if (ledgeDetectorTransform != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(ledgeDetectorTransform.position, 0.05f);
 
-        // Show ledge snap position based on facing direction and offset
-        float direction = _isFacingRight ? 1f : -1f;
-        Vector3 snapPos = ledgeDetectorTransform.position + new Vector3(ledgeHangOffset.x * direction, ledgeHangOffset.y, 0f);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(snapPos, 0.05f);
-    }
+            // Show ledge snap position based on facing direction and offset
+            float direction = _isFacingRight ? 1f : -1f;
+            Vector3 snapPos = ledgeDetectorTransform.position + new Vector3(ledgeHangOffset.x * direction, ledgeHangOffset.y, 0f);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawSphere(snapPos, 0.05f);
+        }
+    //este es un cambio arbitrario
 }
 }
