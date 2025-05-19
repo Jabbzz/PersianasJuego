@@ -200,7 +200,7 @@ public class Playercontroller : MonoBehaviour
         }
 
         if (!wasGroundedLastFrame && touchingDirections.IsGrounded)
-        {   
+        {
             if (landSound != null)
             {
                 audioManager.instance.PlaySound(landSound);
@@ -389,6 +389,24 @@ public class Playercontroller : MonoBehaviour
 
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
+    }
+    
+    private void PlayFootstepSound()
+    {
+        AudioClip clipToPlay = IsRunning ? runSound : walkSound;
+        if (clipToPlay != null)
+        {
+            audioManager.instance.PlaySound(clipToPlay);
+        }
+
+        StartCoroutine(FootstepCooldownRoutine());
+    }
+
+    private IEnumerator FootstepCooldownRoutine()
+    {
+        canPlayFootstep = false;
+        yield return new WaitForSeconds(footstepCooldown);
+        canPlayFootstep = true;
     }
 
 }

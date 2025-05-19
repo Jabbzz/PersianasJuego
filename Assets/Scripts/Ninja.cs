@@ -1,7 +1,9 @@
 using System;
 using UnityEngine;
+using System.Collections;
+
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections), typeof(Damageable))]
-public class Ninja: MonoBehaviour
+public class Ninja : MonoBehaviour
 {
 
     public float walkStopRate = 0.6f;
@@ -11,6 +13,18 @@ public class Ninja: MonoBehaviour
     public DetectionZone attackZone;
     public DetectionZone cliffDectionZone;
     public DetectionZone chaseZone;
+
+    public AudioClip walkSound;
+    public AudioClip runSound;
+    public AudioClip attackSound;
+    public AudioClip deathSound;
+    public AudioClip hitSound;
+    private AudioSource movementAudioSource;
+
+    private bool canPlayFootstep = true;
+    [SerializeField] private float footstepCooldown = 0.4f;
+
+
 
     public float flipDelay = 0.5f; // Time in seconds before flipping
     private float flipTimer = 0f;
@@ -90,6 +104,10 @@ public class Ninja: MonoBehaviour
         animator = GetComponent<Animator>();
         damageable = GetComponent<Damageable>();
         damageable.damageableHit.AddListener(OnHit);
+
+        movementAudioSource = gameObject.AddComponent<AudioSource>();
+        movementAudioSource.playOnAwake = false;
+        movementAudioSource.volume = 0.5f;
     }
     // Update is called once per frame
     void Update()
@@ -168,8 +186,28 @@ public class Ninja: MonoBehaviour
             {
                 rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocity.x, 0, walkStopRate), rb.linearVelocity.y);
             }
-        }
 
+            float speed = Mathf.Abs(rb.linearVelocity.x);
+
+            if (speed > 0 && speed <= walkSpeed) // Caminar
+            {
+                if (canPlayFootstep && walkSound != null)
+                {
+                    movementAudioSource.clip = walkSound;
+                    movementAudioSource.Play();
+                    StartCoroutine(FootstepCooldownRoutine());
+                }
+            }
+            else if (speed > walkSpeed) // Correr
+            {
+                if (canPlayFootstep && runSound != null)
+                {
+                    movementAudioSource.clip = runSound;
+                    movementAudioSource.Play();
+                    StartCoroutine(FootstepCooldownRoutine());
+                }
+            }
+        }
     }
 
     private void FlipDirection()
@@ -188,9 +226,30 @@ public class Ninja: MonoBehaviour
         }
     }
 
+    //Llamar a este método desde la animación
+    public void PlayAttackSound()
+    {
+        if (attackSound != null)
+        {
+            audioManager.instance.PlaySound(attackSound);
+        }
+    }
+
+
     public void OnHit(int damage, Vector2 knockback)
     {
         rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
+
+        if (!damageable.IsAlive)
+        {
+            if (deathSound != null)
+                audioManager.instance.PlaySound(deathSound);
+        }
+        else
+        {
+            if (hitSound != null)
+                audioManager.instance.PlaySound(hitSound);
+        }
     }
 
     public void OnCliffDetected()
@@ -199,6 +258,13 @@ public class Ninja: MonoBehaviour
         {
             FlipDirection();
         }
+    }
+    
+    private IEnumerator FootstepCooldownRoutine()
+    {
+        canPlayFootstep = false;
+        yield return new WaitForSeconds(footstepCooldown);
+        canPlayFootstep = true;
     }
 
 }

@@ -5247,6 +5247,26 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1863565060112011025, guid: ad4efbdcafc51be439d918d95c65c7d7, type: 3}
+      propertyPath: hitSound
+      value: 
+      objectReference: {fileID: 8300000, guid: e97a745e1e1a96340a9afc053d09bc27, type: 3}
+    - target: {fileID: 1863565060112011025, guid: ad4efbdcafc51be439d918d95c65c7d7, type: 3}
+      propertyPath: runSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 7be4a757db18e244ca28f451c96fd5fb, type: 3}
+    - target: {fileID: 1863565060112011025, guid: ad4efbdcafc51be439d918d95c65c7d7, type: 3}
+      propertyPath: walkSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 7be4a757db18e244ca28f451c96fd5fb, type: 3}
+    - target: {fileID: 1863565060112011025, guid: ad4efbdcafc51be439d918d95c65c7d7, type: 3}
+      propertyPath: deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 694c6283f7c1bd746b45197a50ca4bbe, type: 3}
+    - target: {fileID: 1863565060112011025, guid: ad4efbdcafc51be439d918d95c65c7d7, type: 3}
+      propertyPath: attackSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b5b3d547dabd091499213671654df191, type: 3}
     - target: {fileID: 5492367592692186094, guid: ad4efbdcafc51be439d918d95c65c7d7, type: 3}
       propertyPath: m_Constraints
       value: 4
@@ -5344,3 +5364,7 @@ SceneRoots:
   - {fileID: 2109838038}
   - {fileID: 423753395}
   - {fileID: 4406278706938273102}
+  - {fileID: 2612646075839788413}
+  - {fileID: 567805282}
+  - {fileID: 1370683297}
+  - {fileID: 1785631741}
