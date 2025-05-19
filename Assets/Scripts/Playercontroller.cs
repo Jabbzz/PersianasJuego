@@ -13,6 +13,14 @@ public class Playercontroller : MonoBehaviour
     public float airWalkSpeed = 3f;
     public float jumpImpulse = 10f;
 
+    [Header("Dash Settings")]
+    public float dashSpeed = 20f;
+    public float dashDuration = 0.2f;
+    public float dashCooldown = 1f;
+    public bool isDashing = false;
+    private bool canDash = true;
+
+
     private LedgeDetector ledgeDetector;
     public bool isHanging = false;
     public Vector2 ledgeHangOffset = new Vector2(0f, -0.5f); // Adjust for pixel-perfect hang
@@ -148,7 +156,7 @@ public class Playercontroller : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!damageable.LockVelocity)
+        if (!damageable.LockVelocity && !isDashing)
             rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
         animator.SetFloat(AnimationStrings.yVelocity, rb.linearVelocity.y); //makes the character fall/rise
 
@@ -270,12 +278,50 @@ public class Playercontroller : MonoBehaviour
     }
 
     private void UpdateLedgeDetectorPosition()
-{
-    float direction = isFacingRight ? 1 : -1;
-    ledgeDetectorTransform.localPosition = new Vector3(
-        ledgeDetectorOffset.x * direction,
-        ledgeDetectorOffset.y,
-        ledgeDetectorTransform.localPosition.z
-    );
-}
+    {
+        float direction = isFacingRight ? 1 : -1;
+        ledgeDetectorTransform.localPosition = new Vector3(
+            ledgeDetectorOffset.x * direction,
+            ledgeDetectorOffset.y,
+            ledgeDetectorTransform.localPosition.z
+        );
+    }
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (context.started && canDash && IsAlive && CanMove)
+        {
+            StartCoroutine(Dash());
+        }
+    }
+
+    private IEnumerator Dash()
+    {
+        isDashing = true;
+        canDash = false;
+
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0;
+
+        float dashDirection = isFacingRight ? 1f : -1f;
+        rb.linearVelocity = new Vector2(dashDirection * dashSpeed, 0f);
+
+        //slowing time
+        Time.timeScale = 0.5f;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+
+        yield return new WaitForSeconds(dashDuration);
+
+        rb.linearVelocity = Vector2.zero;
+        rb.gravityScale = originalGravity;
+        isDashing = false;
+
+        // Optional: reset time scale
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = 0.02f;
+
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
+    }
+
 }
