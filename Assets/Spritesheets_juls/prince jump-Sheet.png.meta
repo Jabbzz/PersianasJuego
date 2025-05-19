@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 91e8bb2fdcb52c6409c2bf6f64e211f3
+guid: e79a07044b8041b45a0c797f6d316f63
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -123,287 +123,155 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: idle_0
+      name: prince jump-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 256
-        height: 256
+        width: 111
+        height: 192
       alignment: 9
-      pivot: {x: 0.45, y: 0.53}
+      pivot: {x: 0.53701806, y: 0.27409992}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8328e75a026d7e240b09185533810623
-      internalID: 181091387
+      spriteID: e5c1f1384392a084dab1f671fdeb41ec
+      internalID: -782976796
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: idle_1
+      name: prince jump-Sheet_1
       rect:
         serializedVersion: 2
-        x: 256
+        x: 111
         y: 0
-        width: 256
-        height: 256
+        width: 111
+        height: 192
       alignment: 9
-      pivot: {x: 0.45, y: 0.53}
+      pivot: {x: 0.54935753, y: 0.44530845}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6072f2ca5abde154da67c65042d9ad2d
-      internalID: 1098611966
+      spriteID: d6d8970df668bde4d9b6fa2ad948ee94
+      internalID: -12284406
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: idle_2
+      name: prince jump-Sheet_2
       rect:
         serializedVersion: 2
-        x: 512
+        x: 222
         y: 0
-        width: 256
-        height: 256
+        width: 111
+        height: 192
       alignment: 9
-      pivot: {x: 0.45, y: 0.53}
+      pivot: {x: 0.5329048, y: 0.5713369}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8abf1d2e0057d5b468379a7ee22800e9
-      internalID: 1146565560
+      spriteID: 1311f5c0b70646145b0d0b7dcace2ee4
+      internalID: -193014509
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: idle_3
+      name: prince jump-Sheet_3
       rect:
         serializedVersion: 2
-        x: 768
+        x: 333
         y: 0
-        width: 256
-        height: 256
+        width: 111
+        height: 192
       alignment: 9
-      pivot: {x: 0.45, y: 0.53}
+      pivot: {x: 0.5452444, y: 0.6212728}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5373032f44dba2c43a23c55e2bca3328
-      internalID: 438676504
+      spriteID: 18cf7e1102f7b494188b4ced1901a0d2
+      internalID: 1954421561
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: idle_4
+      name: prince jump-Sheet_4
       rect:
         serializedVersion: 2
-        x: 1024
+        x: 444
         y: 0
-        width: 256
-        height: 256
+        width: 111
+        height: 192
       alignment: 9
-      pivot: {x: 0.45, y: 0.53}
+      pivot: {x: 0.56169695, y: 0.616517}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e4622467aa217094bb6ff9ee314a14f8
-      internalID: -1382517832
+      spriteID: 2f2e81cada7f8544c9ca9c5518bc1958
+      internalID: 1737224570
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: idle_5
+      name: prince jump-Sheet_5
       rect:
         serializedVersion: 2
-        x: 1280
+        x: 555
         y: 0
-        width: 256
-        height: 256
+        width: 111
+        height: 192
       alignment: 9
-      pivot: {x: 0.45, y: 0.53}
+      pivot: {x: 0.5740362, y: 0.57847065}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0e14f2d226a369f47a30d4147b706e2f
-      internalID: -941671250
+      spriteID: 32f14e6839b4c2047b487df54f690958
+      internalID: -103483741
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: idle_6
+      name: prince jump-Sheet_6
       rect:
         serializedVersion: 2
-        x: 1536
+        x: 666
         y: 0
-        width: 256
-        height: 256
+        width: 111
+        height: 192
       alignment: 9
-      pivot: {x: 0.45, y: 0.53}
+      pivot: {x: 0.5740362, y: 0.47146532}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4305e8864f71cfe48aeb04dc27841d6a
-      internalID: 923945514
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: idle_7
-      rect:
-        serializedVersion: 2
-        x: 1792
-        y: 0
-        width: 256
-        height: 256
-      alignment: 9
-      pivot: {x: 0.45, y: 0.53}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 59bd9fb663e5add4bbce2854cd77ab76
-      internalID: 762205724
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: idle_8
-      rect:
-        serializedVersion: 2
-        x: 2048
-        y: 0
-        width: 256
-        height: 256
-      alignment: 9
-      pivot: {x: 0.45, y: 0.53}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f6dcb150d42edf1429bb2666a66ebd58
-      internalID: -1556030882
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: idle_9
-      rect:
-        serializedVersion: 2
-        x: 2304
-        y: 0
-        width: 256
-        height: 256
-      alignment: 9
-      pivot: {x: 0.45, y: 0.53}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9db4a34ff87543c469c3ba092d76524a
-      internalID: 800737750
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: idle_10
-      rect:
-        serializedVersion: 2
-        x: 2560
-        y: 0
-        width: 256
-        height: 256
-      alignment: 9
-      pivot: {x: 0.45, y: 0.53}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2c6d8879d5131ff42b16ae008466addb
-      internalID: 2103771165
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: idle_11
-      rect:
-        serializedVersion: 2
-        x: 2816
-        y: 0
-        width: 256
-        height: 256
-      alignment: 9
-      pivot: {x: 0.45, y: 0.53}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 721d6cd149cb6644aaa424fd2a75ce53
-      internalID: 972997975
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: idle_12
-      rect:
-        serializedVersion: 2
-        x: 3072
-        y: 0
-        width: 256
-        height: 256
-      alignment: 9
-      pivot: {x: 0.45, y: 0.53}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c2d263365688b6f49b8b88248f5b58b5
-      internalID: -572665996
+      spriteID: 52e9c347ce48c7443a0d764636b1148c
+      internalID: 498802657
       vertices: []
       indices: 
       edges: []
@@ -422,19 +290,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      idle_0: 181091387
-      idle_1: 1098611966
-      idle_10: 2103771165
-      idle_11: 972997975
-      idle_12: -572665996
-      idle_2: 1146565560
-      idle_3: 438676504
-      idle_4: -1382517832
-      idle_5: -941671250
-      idle_6: 923945514
-      idle_7: 762205724
-      idle_8: -1556030882
-      idle_9: 800737750
+      prince jump-Sheet_0: -782976796
+      prince jump-Sheet_1: -12284406
+      prince jump-Sheet_2: -193014509
+      prince jump-Sheet_3: 1954421561
+      prince jump-Sheet_4: 1737224570
+      prince jump-Sheet_5: -103483741
+      prince jump-Sheet_6: 498802657
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
