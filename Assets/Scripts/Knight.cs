@@ -9,6 +9,11 @@ public class Knight : MonoBehaviour
     Damageable damageable;
     public DetectionZone attackZone;
     public DetectionZone cliffDectionZone;
+    public DetectionZone chaseZone;
+
+    public float flipDelay = 0.5f; // Time in seconds before flipping
+    private float flipTimer = 0f;
+    private bool playerBehind = false;
     Rigidbody2D rb;
     TouchingDirections touchingDirections;
     Animator animator;
@@ -103,9 +108,48 @@ public class Knight : MonoBehaviour
         {
             FlipDirection();
         }
+
         if (!damageable.LockVelocity)
         {
-            if (CanMove)
+            // Chase logic
+            if (chaseZone.detectedColliders.Count > 0)
+            {
+                // Assume the first collider is the player
+                Transform player = chaseZone.detectedColliders[0].transform;
+                float directionToPlayer = Mathf.Sign(player.position.x - transform.position.x);
+
+                // Determine which way the Knight is facing
+                float knightFacing = (WalkDirection == WalkableDirection.Left) ? 1f : -1f;
+
+                // Check if player is behind
+                if (Mathf.Sign(directionToPlayer) != knightFacing)
+                {
+                    if (!playerBehind)
+                    {
+                        playerBehind = true;
+                        flipTimer = flipDelay; // Start the timer
+                    }
+                }
+                else
+                {
+                    playerBehind = false;
+                    flipTimer = 0f;
+                }
+
+                // Handle flip delay
+                if (playerBehind)
+                {
+                    flipTimer -= Time.fixedDeltaTime;
+                    if (flipTimer <= 0f)
+                    {
+                        FlipDirection();
+                        playerBehind = false;
+                    }
+                }
+
+                rb.linearVelocity = new Vector2(walkSpeed * directionToPlayer, rb.linearVelocity.y);
+            }
+            else if (CanMove)
             {
                 rb.linearVelocity = new Vector2(walkSpeed * walkDirectionVector.x, rb.linearVelocity.y);
             }
