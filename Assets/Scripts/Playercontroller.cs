@@ -157,7 +157,7 @@ public class Playercontroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        UpdateLedgeDetectorPosition(); // Always keep ledge detector on correct side
     }
 
     void FixedUpdate()
@@ -346,6 +346,5 @@ public class Playercontroller : MonoBehaviour
             Gizmos.color = Color.yellow;
             Gizmos.DrawSphere(snapPos, 0.05f);
         }
-    //este es un cambio arbitrario
 }
 }
