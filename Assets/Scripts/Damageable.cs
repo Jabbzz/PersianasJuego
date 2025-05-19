@@ -81,6 +81,8 @@ public class Damageable : MonoBehaviour
             Health -= damage;
             isInvincible = true;
 
+            lifeManager.instance.LoseLife();
+
             animator.SetTrigger(AnimationStrings.hitTrigger);
             LockVelocity = true;
             //Notify other components that the damageable was hit to handle knockback
