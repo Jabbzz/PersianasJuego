@@ -125,6 +125,19 @@ public class Playercontroller : MonoBehaviour
 
     Vector2 moveInput; // Variable to store the movement input
     Animator animator; // Variable to store the Animator component
+    [SerializeField] private AudioClip walkSound;
+    [SerializeField] private AudioClip runSound;
+    [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private AudioClip climbSound;
+    [SerializeField] private AudioClip attackSound;
+    [SerializeField] private AudioClip hitSound;
+    [SerializeField] private AudioClip landSound;
+    [SerializeField] private AudioClip deathSound;
+
+    private bool wasGroundedLastFrame = false;
+
+    private bool canPlayFootstep = true;
+    [SerializeField] private float footstepCooldown = 0.4f;
 
     private void Awake()
     {
@@ -141,9 +154,18 @@ public class Playercontroller : MonoBehaviour
     }
 
     // Update is called once per frame
+    private bool wasAliveLastFrame = true;
     void Update()
     {
+        if (wasAliveLastFrame && !IsAlive)
+        {
+            if (deathSound != null)
+            {
+                audioManager.instance.PlaySound(deathSound);
+            }
+        }
 
+        wasAliveLastFrame = IsAlive;
     }
 
     void FixedUpdate()
@@ -157,6 +179,22 @@ public class Playercontroller : MonoBehaviour
         {
             EnterLedgeHang();
         }
+
+        if (touchingDirections.IsGrounded && IsMoving && !isHanging && canPlayFootstep)
+        {
+            PlayFootstepSound();
+        }
+
+        if (!wasGroundedLastFrame && touchingDirections.IsGrounded)
+        {   
+            if (landSound != null)
+            {
+                audioManager.instance.PlaySound(landSound);
+            }
+        }
+
+        wasGroundedLastFrame = touchingDirections.IsGrounded;
+
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -210,6 +248,11 @@ public class Playercontroller : MonoBehaviour
         {
             animator.SetTrigger(AnimationStrings.jumpTrigger);
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulse);
+
+            if (jumpSound != null)
+            {
+                audioManager.instance.PlaySound(jumpSound);
+            }
         }
     }
     public void OnAttack(InputAction.CallbackContext context)
@@ -217,6 +260,11 @@ public class Playercontroller : MonoBehaviour
         if (context.started)
         {
             animator.SetTrigger(AnimationStrings.attackTrigger);
+
+            if (attackSound != null)
+            {
+                audioManager.instance.PlaySound(attackSound);
+            }
         }
     }
 
@@ -224,6 +272,11 @@ public class Playercontroller : MonoBehaviour
     public void OnHit(int damage, Vector2 knockback)
     {
         rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
+
+        if (hitSound != null)
+        {
+            audioManager.instance.PlaySound(hitSound);
+        }
     }
 
     void CheckForLedge()
@@ -261,6 +314,12 @@ public class Playercontroller : MonoBehaviour
     IEnumerator ClimbUp()
     {
         animator.SetTrigger(AnimationStrings.climbUp); // optional
+
+        if (climbSound != null)
+        {
+            audioManager.instance.PlaySound(climbSound);
+        }
+
         yield return new WaitForSeconds(0.1f); // simulate climb time
 
         ExitLedgeHang(); // reset states
@@ -270,12 +329,31 @@ public class Playercontroller : MonoBehaviour
     }
 
     private void UpdateLedgeDetectorPosition()
-{
-    float direction = isFacingRight ? 1 : -1;
-    ledgeDetectorTransform.localPosition = new Vector3(
-        ledgeDetectorOffset.x * direction,
-        ledgeDetectorOffset.y,
-        ledgeDetectorTransform.localPosition.z
-    );
+    {
+        float direction = isFacingRight ? 1 : -1;
+        ledgeDetectorTransform.localPosition = new Vector3(
+            ledgeDetectorOffset.x * direction,
+            ledgeDetectorOffset.y,
+            ledgeDetectorTransform.localPosition.z
+        );
+    }
+
+    private void PlayFootstepSound()
+    {
+        AudioClip clipToPlay = IsRunning ? runSound : walkSound;
+        if (clipToPlay != null)
+        {
+            audioManager.instance.PlaySound(clipToPlay);
+        }
+
+        StartCoroutine(FootstepCooldownRoutine());
+    }
+
+    private IEnumerator FootstepCooldownRoutine()
+    {
+        canPlayFootstep = false;
+        yield return new WaitForSeconds(footstepCooldown);
+        canPlayFootstep = true;
+    }
 }
-}
+
