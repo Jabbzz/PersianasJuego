@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 86f1b618ec7493748ac26952ba5e8e0e
+guid: e79a07044b8041b45a0c797f6d316f63
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,177 +123,155 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: run_0
+      name: prince jump-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 126
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 111
+        height: 192
+      alignment: 9
+      pivot: {x: 0.53701806, y: 0.27409992}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 48f70c86ce7b05b418959509a2e3e990
-      internalID: -1280988913
+      spriteID: e5c1f1384392a084dab1f671fdeb41ec
+      internalID: -782976796
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: run_1
+      name: prince jump-Sheet_1
       rect:
         serializedVersion: 2
-        x: 126
+        x: 111
         y: 0
-        width: 126
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 111
+        height: 192
+      alignment: 9
+      pivot: {x: 0.54935753, y: 0.44530845}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b3d1397d3620234a843153f5e1a8d36
-      internalID: 1048194095
+      spriteID: d6d8970df668bde4d9b6fa2ad948ee94
+      internalID: -12284406
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: run_2
+      name: prince jump-Sheet_2
       rect:
         serializedVersion: 2
-        x: 252
+        x: 222
         y: 0
-        width: 126
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 111
+        height: 192
+      alignment: 9
+      pivot: {x: 0.5329048, y: 0.5713369}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1931393ba71f74243847c129d385be32
-      internalID: -157436379
+      spriteID: 1311f5c0b70646145b0d0b7dcace2ee4
+      internalID: -193014509
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: run_3
+      name: prince jump-Sheet_3
       rect:
         serializedVersion: 2
-        x: 378
+        x: 333
         y: 0
-        width: 126
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 111
+        height: 192
+      alignment: 9
+      pivot: {x: 0.5452444, y: 0.6212728}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6726cf6b04eca734c97112457cbb2a07
-      internalID: -880999627
+      spriteID: 18cf7e1102f7b494188b4ced1901a0d2
+      internalID: 1954421561
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: run_4
+      name: prince jump-Sheet_4
       rect:
         serializedVersion: 2
-        x: 504
+        x: 444
         y: 0
-        width: 126
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 111
+        height: 192
+      alignment: 9
+      pivot: {x: 0.56169695, y: 0.616517}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4610c32db8923b54b93fdc32ea55bb68
-      internalID: 2117134790
+      spriteID: 2f2e81cada7f8544c9ca9c5518bc1958
+      internalID: 1737224570
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: run_5
+      name: prince jump-Sheet_5
       rect:
         serializedVersion: 2
-        x: 630
+        x: 555
         y: 0
-        width: 126
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 111
+        height: 192
+      alignment: 9
+      pivot: {x: 0.5740362, y: 0.57847065}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 19bf41e9f64612347b37584d0ba87072
-      internalID: 737136553
+      spriteID: 32f14e6839b4c2047b487df54f690958
+      internalID: -103483741
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: run_6
+      name: prince jump-Sheet_6
       rect:
         serializedVersion: 2
-        x: 756
+        x: 666
         y: 0
-        width: 126
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 111
+        height: 192
+      alignment: 9
+      pivot: {x: 0.5740362, y: 0.47146532}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 641aa1bf9dd00884783ad83ebdd4d57b
-      internalID: -2015137369
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: run_7
-      rect:
-        serializedVersion: 2
-        x: 882
-        y: 0
-        width: 126
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 16639e24d0df2d14698abf2d7a1ca636
-      internalID: -1941798311
+      spriteID: 52e9c347ce48c7443a0d764636b1148c
+      internalID: 498802657
       vertices: []
       indices: 
       edges: []
@@ -312,14 +290,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      run_0: -1280988913
-      run_1: 1048194095
-      run_2: -157436379
-      run_3: -880999627
-      run_4: 2117134790
-      run_5: 737136553
-      run_6: -2015137369
-      run_7: -1941798311
+      prince jump-Sheet_0: -782976796
+      prince jump-Sheet_1: -12284406
+      prince jump-Sheet_2: -193014509
+      prince jump-Sheet_3: 1954421561
+      prince jump-Sheet_4: 1737224570
+      prince jump-Sheet_5: -103483741
+      prince jump-Sheet_6: 498802657
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
