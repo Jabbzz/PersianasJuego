@@ -253,7 +253,7 @@ PrefabInstance:
     - target: {fileID: 4546717293111613786, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
       propertyPath: hitSound
       value: 
-      objectReference: {fileID: 8300000, guid: cb5fed8382ea69c48b1758ec6660569b, type: 3}
+      objectReference: {fileID: 8300000, guid: df177eca0296a6543b2152d44e0a39aa, type: 3}
     - target: {fileID: 4546717293111613786, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
       propertyPath: runSound
       value: 
@@ -4600,7 +4600,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4712,7 +4712,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -5435,7 +5435,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8745108258856602214, guid: ad4efbdcafc51be439d918d95c65c7d7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5456,8 +5456,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 478704578849154281, guid: 69b65695c69e27b41a43e43e948141f5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3289640249738533096, guid: 69b65695c69e27b41a43e43e948141f5, type: 3}
+      propertyPath: hitSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b2c7adf9daaf5c74bb9b02a3b678c43e, type: 3}
+    - target: {fileID: 3289640249738533096, guid: 69b65695c69e27b41a43e43e948141f5, type: 3}
+      propertyPath: runSound
+      value: 
+      objectReference: {fileID: 8300000, guid: a849ca302c2c23647b0548b4ce31b430, type: 3}
+    - target: {fileID: 3289640249738533096, guid: 69b65695c69e27b41a43e43e948141f5, type: 3}
+      propertyPath: walkSound
+      value: 
+      objectReference: {fileID: 8300000, guid: a849ca302c2c23647b0548b4ce31b430, type: 3}
+    - target: {fileID: 3289640249738533096, guid: 69b65695c69e27b41a43e43e948141f5, type: 3}
+      propertyPath: deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: bd834c5e19f8ef644949313e112cbb0d, type: 3}
+    - target: {fileID: 3289640249738533096, guid: 69b65695c69e27b41a43e43e948141f5, type: 3}
+      propertyPath: attackSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f5e26bc1dfa097b40b05c9632bb5bdcb, type: 3}
     - target: {fileID: 4250230610299938308, guid: 69b65695c69e27b41a43e43e948141f5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -41.8

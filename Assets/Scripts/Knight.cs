@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections;
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections), typeof(Damageable))]
 public class Knight : MonoBehaviour
 {
@@ -10,6 +11,18 @@ public class Knight : MonoBehaviour
     public DetectionZone attackZone;
     public DetectionZone cliffDectionZone;
     public DetectionZone chaseZone;
+
+    public AudioClip walkSound;
+    public AudioClip runSound;
+    public AudioClip attackSound;
+    public AudioClip deathSound;
+    public AudioClip hitSound;
+    private AudioSource movementAudioSource;
+    public AudioClip monsterSound;
+
+
+    private bool canPlayFootstep = true;
+    [SerializeField] private float footstepCooldown = 0.4f;
 
     public float flipDelay = 0.5f; // Time in seconds before flipping
     private float flipTimer = 0f;
@@ -82,6 +95,12 @@ public class Knight : MonoBehaviour
             return animator.GetBool(AnimationStrings.canMove);
         }
     }
+
+    private void Start()
+    {
+        StartCoroutine(MonsterSoundRoutine());
+    }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -89,6 +108,10 @@ public class Knight : MonoBehaviour
         animator = GetComponent<Animator>();
         damageable = GetComponent<Damageable>();
         damageable.damageableHit.AddListener(OnHit);
+
+        movementAudioSource = gameObject.AddComponent<AudioSource>();
+        movementAudioSource.playOnAwake = false;
+        movementAudioSource.volume = 0.5f;
     }
     // Update is called once per frame
     void Update()
@@ -157,6 +180,26 @@ public class Knight : MonoBehaviour
             {
                 rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocity.x, 0, walkStopRate), rb.linearVelocity.y);
             }
+
+            float speed = Mathf.Abs(rb.linearVelocity.x);
+
+            if (speed > 0 && speed <= walkSpeed) // Caminar
+            {
+                Debug.Log("Reproduciendo sonido de caminar");
+                if (canPlayFootstep && walkSound != null)
+                {
+                    audioManager.instance.PlaySound(walkSound);
+                    StartCoroutine(FootstepCooldownRoutine());
+                }
+            }
+            else if (speed > walkSpeed) // Correr
+            {
+                if (canPlayFootstep && runSound != null)
+                {
+                    audioManager.instance.PlaySound(runSound);
+                    StartCoroutine(FootstepCooldownRoutine());
+                }
+            }
         }
 
     }
@@ -177,9 +220,29 @@ public class Knight : MonoBehaviour
         }
     }
 
+    //Llamar a este método desde la animación
+    public void PlayAttackSound()
+    {
+        if (attackSound != null)
+        {
+            audioManager.instance.PlaySound(attackSound);
+        }
+    }
+
     public void OnHit(int damage, Vector2 knockback)
     {
         rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
+
+        if (!damageable.IsAlive)
+        {
+            if (deathSound != null)
+                audioManager.instance.PlaySound(deathSound);
+        }
+        else
+        {
+            if (hitSound != null)
+                audioManager.instance.PlaySound(hitSound);
+        }
     }
 
     public void OnCliffDetected()
@@ -189,5 +252,27 @@ public class Knight : MonoBehaviour
             FlipDirection();
         }
     }
+
+    private IEnumerator FootstepCooldownRoutine()
+    {
+        canPlayFootstep = false;
+        yield return new WaitForSeconds(footstepCooldown);
+        canPlayFootstep = true;
+    }
+
+    private IEnumerator MonsterSoundRoutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(5f);
+
+            if (monsterSound != null && damageable.IsAlive && HasTarget)
+            {
+                audioManager.instance.PlaySound(monsterSound);
+            }
+
+        }
+    }
+
 
 }
