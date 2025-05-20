@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "carpeta_rama.sln"
+    "dotnet.defaultSolution": "carpeta_main.sln"
 }
