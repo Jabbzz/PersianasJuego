@@ -256,6 +256,7 @@ public class Playercontroller : MonoBehaviour
             return;
         if (isHanging)
         {
+            animator.SetTrigger(AnimationStrings.climbUp); // optional
             StartCoroutine(ClimbUp());
         }
         else if (context.started && touchingDirections.IsGrounded && CanMove)
@@ -307,8 +308,13 @@ public class Playercontroller : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         rb.gravityScale = 0;
 
-        // Snap to ledge position
-        Vector3 snapPos = ledgeDetector.transform.position + (Vector3)ledgeHangOffset;
+        // Snap to ledge position, accounting for facing direction
+        //
+        Vector3 snapPos = ledgeDetector.transform.position + new Vector3(
+            ledgeHangOffset.x * (isFacingRight ? 1 : -1),
+            ledgeHangOffset.y,
+            0f
+        );
         transform.position = new Vector3(
             Mathf.Round(snapPos.x * 16) / 16f,
             Mathf.Round(snapPos.y * 16) / 16f,
@@ -339,17 +345,20 @@ public class Playercontroller : MonoBehaviour
         ExitLedgeHang(); // reset states
 
         // Snap player to stand on the ledge
-        transform.position += new Vector3(0, 1f, 0);
+        float direction = isFacingRight ? 0.5f : -0.5f;
+        transform.position += new Vector3(direction, 1f, 0);
     }
 
     private void UpdateLedgeDetectorPosition()
     {
         float direction = isFacingRight ? 1 : -1;
-        ledgeDetectorTransform.localPosition = new Vector3(
+        Vector3 newPos = new Vector3(
             ledgeDetectorOffset.x * direction,
             ledgeDetectorOffset.y,
             ledgeDetectorTransform.localPosition.z
         );
+        ledgeDetectorTransform.localPosition = newPos;
+        Debug.Log($"LedgeDetector localPosition: {ledgeDetectorTransform.localPosition}, isFacingRight: {isFacingRight}");
     }
 
     public void OnDash(InputAction.CallbackContext context)
@@ -409,4 +418,19 @@ public class Playercontroller : MonoBehaviour
         canPlayFootstep = true;
     }
 
+
+    private void OnDrawGizmosSelected()
+    {
+        if (ledgeDetectorTransform != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(ledgeDetectorTransform.position, 0.05f);
+
+            // Show ledge snap position based on facing direction and offset
+            float direction = _isFacingRight ? 1f : -1f;
+            Vector3 snapPos = ledgeDetectorTransform.position + new Vector3(ledgeHangOffset.x * direction, ledgeHangOffset.y, 0f);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawSphere(snapPos, 0.05f);
+        }
+    }
 }

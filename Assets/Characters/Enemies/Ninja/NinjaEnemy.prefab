@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 10
-  knockback: {x: 0, y: 0}
+  knockback: {x: 5, y: 0}
 --- !u!1 &2584382567926697278
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,7 +556,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &3993182743886384808
 MonoBehaviour:
   m_ObjectHideFlags: 0
