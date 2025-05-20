@@ -399,7 +399,7 @@ public class Playercontroller : MonoBehaviour
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
-    
+
     private void PlayFootstepSound()
     {
         AudioClip clipToPlay = IsRunning ? runSound : walkSound;
@@ -433,4 +433,20 @@ public class Playercontroller : MonoBehaviour
             Gizmos.DrawSphere(snapPos, 0.05f);
         }
     }
+    
+    public void ResetPlayer()
+{
+    // Reinicia posición, salud, estados, animaciones, etc.
+    transform.position = Vector3.zero; // O la posición inicial que prefieras
+    damageable.Health = damageable.MaxHealth;
+    lifeManager.instance.currentLives = lifeManager.instance.maxLives;
+    lifeManager.instance.UpdateUI();
+
+    // Rehabilitar variables necesarias
+    animator.SetBool(AnimationStrings.isAlive, true);
+    // Otros resets que necesites...
+
+    Debug.Log("Player reiniciado");
+}
+
 }

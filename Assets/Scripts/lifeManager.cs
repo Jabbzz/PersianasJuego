@@ -5,12 +5,14 @@ public class lifeManager : MonoBehaviour
 {
     public static lifeManager instance;
 
-    public int maxLives = 4;
+    public int maxLives = 5;
     public int currentLives;
 
     public Image[] lifeImages;  // Asigna aquí las imágenes en el inspector
     public Sprite fullHeart;    // Sprite para vida completa
     public Sprite emptyHeart;   // Sprite para vida vacía
+
+    
 
     private void Awake()
     {
@@ -31,14 +33,30 @@ public class lifeManager : MonoBehaviour
         UpdateUI();
     }
 
-    public void LoseLife()
+    // lifeManager.cs
+    public void LoseLife(bool isPlayer)
     {
-        if (currentLives > 0)
+        if (isPlayer && currentLives > 0)
         {
             currentLives--;
             UpdateUI();
+            if (currentLives <= 0)
+            {
+                GameOver();
+            }
         }
     }
+
+  
+
+    private void GameOver()
+    {
+        Debug.Log("¡Game Over! Reiniciando jugador...");
+        FindObjectOfType<Playercontroller>()?.ResetPlayer();
+        // Puedes recargar la escena, ir a una pantalla de fin, etc.
+        // SceneManager.LoadScene("GameOverScene");
+    }
+
 
     public void AddLife()
     {
@@ -49,7 +67,7 @@ public class lifeManager : MonoBehaviour
         }
     }
 
-    private void UpdateUI()
+    public void UpdateUI()
     {
         for (int i = 0; i < lifeImages.Length; i++)
         {
