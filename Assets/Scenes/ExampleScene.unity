@@ -180,6 +180,10 @@ PrefabInstance:
       propertyPath: m_Actions
       value: 
       objectReference: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+    - target: {fileID: 116583193976640913, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2388434359137948043, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
       propertyPath: m_LocalPosition.x
       value: -56.97
@@ -220,18 +224,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4546717293111613786, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
-      propertyPath: dashSpeed
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 4546717293111613786, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
-      propertyPath: dashColor.r
-      value: 0.16862746
+    - target: {fileID: 2388434359137948043, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4546717293111613786, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
       propertyPath: dashGlowMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 36c4f265b01cbed43a94a43e62a1d17a, type: 2}
+    - target: {fileID: 4546717293111613786, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
+      propertyPath: ledgeDetectorOffset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4546717293111613786, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
+      propertyPath: ledgeDetectorOffset.y
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4738241158958306253, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
       propertyPath: m_Name
       value: Player
@@ -239,6 +247,14 @@ PrefabInstance:
     - target: {fileID: 4738241158958306253, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057802762969438949, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
+      propertyPath: m_Size.x
+      value: 41.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057802762969438949, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
+      propertyPath: m_Size.y
+      value: 25.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

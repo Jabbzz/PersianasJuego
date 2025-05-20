@@ -218,6 +218,7 @@ public class Playercontroller : MonoBehaviour
             return;
         if (isHanging)
         {
+            animator.SetTrigger(AnimationStrings.climbUp); // optional
             StartCoroutine(ClimbUp());
         }
         else if (context.started && touchingDirections.IsGrounded && CanMove)
@@ -256,7 +257,11 @@ public class Playercontroller : MonoBehaviour
 
         // Snap to ledge position, accounting for facing direction
         //
-        Vector3 snapPos = ledgeDetector.transform.position + new Vector3(ledgeHangOffset.x, ledgeHangOffset.y, 0f);
+        Vector3 snapPos = ledgeDetector.transform.position + new Vector3(
+            ledgeHangOffset.x * (isFacingRight ? 1 : -1),
+            ledgeHangOffset.y,
+            0f
+        );
         transform.position = new Vector3(
             Mathf.Round(snapPos.x * 16) / 16f,
             Mathf.Round(snapPos.y * 16) / 16f,
@@ -275,23 +280,25 @@ public class Playercontroller : MonoBehaviour
 
     IEnumerator ClimbUp()
     {
-        animator.SetTrigger(AnimationStrings.climbUp); // optional
-        yield return new WaitForSeconds(0.1f); // simulate climb time
+        yield return new WaitForSeconds(0.3f); // simulate climb time
 
         ExitLedgeHang(); // reset states
 
         // Snap player to stand on the ledge
-        transform.position += new Vector3(0, 1f, 0);
+        float direction = isFacingRight ? 0.5f : -0.5f;
+        transform.position += new Vector3(direction, 1f, 0);
     }
 
     private void UpdateLedgeDetectorPosition()
     {
         float direction = isFacingRight ? 1 : -1;
-        ledgeDetectorTransform.localPosition = new Vector3(
+        Vector3 newPos = new Vector3(
             ledgeDetectorOffset.x * direction,
             ledgeDetectorOffset.y,
             ledgeDetectorTransform.localPosition.z
         );
+        ledgeDetectorTransform.localPosition = newPos;
+        Debug.Log($"LedgeDetector localPosition: {ledgeDetectorTransform.localPosition}, isFacingRight: {isFacingRight}");
     }
 
     public void OnDash(InputAction.CallbackContext context)

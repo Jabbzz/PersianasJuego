@@ -149,11 +149,11 @@ MonoBehaviour:
   walkSpeed: 5
   airWalkSpeed: 9
   jumpImpulse: 7
-  dashSpeed: 5
+  dashSpeed: 17
   dashDuration: 0.2
   dashCooldown: 1
   isDashing: 0
-  dashColor: {r: 0, g: 1, b: 0.8666667, a: 1}
+  dashColor: {r: 0.16862746, g: 1, b: 0.8666667, a: 1}
   isHanging: 0
   ledgeHangOffset: {x: -0.5, y: -0.5}
   ledgeDetectorTransform: {fileID: 116583193976640913}
