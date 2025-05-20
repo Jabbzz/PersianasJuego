@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class lifeManager : MonoBehaviour
 {
@@ -8,11 +9,24 @@ public class lifeManager : MonoBehaviour
     public int maxLives = 5;
     public int currentLives;
 
-    public Image[] lifeImages;  // Asigna aquí las imágenes en el inspector
-    public Sprite fullHeart;    // Sprite para vida completa
-    public Sprite emptyHeart;   // Sprite para vida vacía
+    public Image[] lifeImages;
+    public Sprite fullHeart;
+    public Sprite emptyHeart;
+
+    private Vector3 initialPosition;
+
+    public Vector3 GetInitialPosition()
+    {
+        return initialPosition;
+    }
+
+    private void Start()
+    {
+        initialPosition = GameObject.FindWithTag("Player").transform.position;
+    }
 
     
+
 
     private void Awake()
     {
@@ -20,6 +34,7 @@ public class lifeManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
@@ -27,57 +42,65 @@ public class lifeManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Reasignar referencias de UI al cargar nueva escena
+        ReassignUIReferences();
+        InitializeLives();
+    }
+
+    private void ReassignUIReferences()
+    {
+        // Buscar y asignar las imágenes de vida en la nueva escena
+        var lifeImagesParent = GameObject.Find("LifeImagesPanel");
+        if (lifeImagesParent != null)
+        {
+            lifeImages = lifeImagesParent.GetComponentsInChildren<Image>();
+        }
+    }
+
+    public void InitializeLives()
     {
         currentLives = maxLives;
         UpdateUI();
     }
 
-    // lifeManager.cs
     public void LoseLife(bool isPlayer)
     {
-        if (isPlayer && currentLives > 0)
+        if (!isPlayer) return;
+
+        if (currentLives > 0)
         {
             currentLives--;
             UpdateUI();
+
             if (currentLives <= 0)
             {
-                GameOver();
+                HandleGameOver();
             }
         }
     }
 
-  
-
-    private void GameOver()
+    private void HandleGameOver()
     {
-        Debug.Log("¡Game Over! Reiniciando jugador...");
-        FindObjectOfType<Playercontroller>()?.ResetPlayer();
-        // Puedes recargar la escena, ir a una pantalla de fin, etc.
-        // SceneManager.LoadScene("GameOverScene");
-    }
-
-
-    public void AddLife()
-    {
-        if (currentLives < maxLives)
-        {
-            currentLives++;
-            UpdateUI();
-        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void UpdateUI()
     {
+        if (lifeImages == null) return;
+
         for (int i = 0; i < lifeImages.Length; i++)
         {
-            if (i < currentLives)
+            if (lifeImages[i] != null)
             {
-                lifeImages[i].sprite = fullHeart;
-            }
-            else
-            {
-                lifeImages[i].sprite = emptyHeart;
+                lifeImages[i].sprite = i < currentLives ? fullHeart : emptyHeart;
+                lifeImages[i].enabled = i < maxLives;
             }
         }
     }

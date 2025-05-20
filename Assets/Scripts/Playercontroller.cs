@@ -3,6 +3,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem; // Import the InputSystem namespace
+using UnityEngine.SceneManagement;
+
+
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections), typeof(Damageable)),] // Require a Rigidbody2D component on the GameObject
 public class Playercontroller : MonoBehaviour
 {
@@ -177,10 +180,20 @@ public class Playercontroller : MonoBehaviour
             {
                 audioManager.instance.PlaySound(deathSound);
             }
+
+            // Reiniciar escena tras la muerte
+            StartCoroutine(ReloadSceneAfterDelay(1.5f));
         }
 
         wasAliveLastFrame = IsAlive;
     }
+
+    private IEnumerator ReloadSceneAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
 
     void FixedUpdate()
     {
