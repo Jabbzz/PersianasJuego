@@ -1,13 +1,40 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem; // Import the InputSystem namespace
+
+[System.Serializable]
+public struct InputSnapshot
+{
+    public Vector2 move;
+    public bool jump;
+    public bool run;
+    public bool attack;
+
+    public InputSnapshot(Vector2 move, bool jump, bool run, bool attack)
+    {
+        this.move = move;
+        this.jump = jump;
+        this.run = run;
+        this.attack = attack;
+    }
+}
+
+
+
+
+
+
+
+
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections), typeof(Damageable)),] // Require a Rigidbody2D component on the GameObject
 public class Playercontroller : MonoBehaviour
 {
-    Rigidbody2D rb;
-    TouchingDirections touchingDirections;
+    protected Rigidbody2D rb;
+    protected TouchingDirections touchingDirections;
 
     public float walkSpeed = 5f;
     public float airWalkSpeed = 3f;
@@ -24,6 +51,18 @@ public class Playercontroller : MonoBehaviour
     private Color originalColor;
 
 
+
+    //cositas para manipulacion del tiempo
+    public float inputRecordDuration = 2f;
+    public float inputSnapshotInterval = 0.1f;
+    private float inputSnapshotTimer = 0f;
+
+    private List<InputSnapshot> inputHistory = new List<InputSnapshot>();
+
+    private bool jumpPressed = false;
+    protected private bool runHeld = false;
+    private bool attackPressed = false;
+    public GameObject ghostClonePrefab;
 
     private LedgeDetector ledgeDetector;
     public bool isHanging = false;
@@ -42,7 +81,7 @@ public class Playercontroller : MonoBehaviour
         {
             return _isMoving; // Return the value of isMoving
         }
-        private set
+        protected private set
         {
             _isMoving = value; // Set the value of isMoving
             animator.SetBool(AnimationStrings.isMoving, value); // Set the animator parameter "isMoving" based on the value
@@ -56,7 +95,7 @@ public class Playercontroller : MonoBehaviour
         {
             return _isRunning; // Return the value of isRunning
         }
-        private set
+        protected private set
         {
             _isRunning = value; // Set the value of isRunning
             animator.SetBool(AnimationStrings.isRunning, value); // Set the animator parameter "isRunning" based on the value
@@ -135,8 +174,8 @@ public class Playercontroller : MonoBehaviour
     }
 
 
-    Vector2 moveInput; // Variable to store the movement input
-    Animator animator; // Variable to store the Animator component
+    protected Vector2 moveInput; // Variable to store the movement input
+    protected Animator animator; // Variable to store the Animator component
 
     private void Awake()
     {
@@ -171,9 +210,27 @@ public class Playercontroller : MonoBehaviour
         {
             EnterLedgeHang();
         }
+
+
+        //time manipulation
+        inputSnapshotTimer += Time.fixedDeltaTime;
+        if (inputSnapshotTimer >= inputSnapshotInterval)
+        {
+            inputSnapshotTimer = 0f;
+
+            inputHistory.Add(new InputSnapshot(moveInput, jumpPressed, runHeld, attackPressed));
+
+            // Reset one-time triggers
+            jumpPressed = false;
+            attackPressed = false;
+
+            // Trim to fit duration
+            if (inputHistory.Count > inputRecordDuration / inputSnapshotInterval)
+                inputHistory.RemoveAt(0);
+        }
     }
 
-    public void OnMove(InputAction.CallbackContext context)
+    public virtual void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
         if (IsAlive)
@@ -184,7 +241,24 @@ public class Playercontroller : MonoBehaviour
         }
     }
 
-    private void SetFacingDirection(Vector2 moveInput)
+    public void OnSpawnClone(InputAction.CallbackContext context)
+    {
+        if (context.started && inputHistory.Count > 0)
+        {
+            GameObject ghost = Instantiate(ghostClonePrefab, transform.position, Quaternion.identity);
+            GhostPlayerController ghostScript = ghost.GetComponent<GhostPlayerController>();
+            ghostScript.InitReplay(inputHistory);
+        }
+
+         // Trigger the impulse
+        CinemachineImpulseSource impulse = GetComponent<CinemachineImpulseSource>();
+        if (impulse != null)
+        {
+            impulse.GenerateImpulse();
+        }
+    }
+
+    protected private void SetFacingDirection(Vector2 moveInput)
     {
         //Facing right
         if (moveInput.x > 0 && !isFacingRight)
@@ -200,8 +274,10 @@ public class Playercontroller : MonoBehaviour
         }
     }
 
-    public void OnRun(InputAction.CallbackContext context)
+    public virtual void OnRun(InputAction.CallbackContext context)
     {
+        runHeld = context.ReadValueAsButton(); // true when held down
+        // Your existing run logic...
         if (context.started)
         {
             IsRunning = true;
@@ -212,8 +288,12 @@ public class Playercontroller : MonoBehaviour
         }
     }
 
-    public void OnJump(InputAction.CallbackContext context)
+    public virtual void OnJump(InputAction.CallbackContext context)
     {
+        if (context.started)
+            jumpPressed = true;
+
+        // Your existing jump logic...
         if (!IsAlive)
             return;
         if (isHanging)
@@ -227,8 +307,13 @@ public class Playercontroller : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulse);
         }
     }
-    public void OnAttack(InputAction.CallbackContext context)
+
+    public virtual void OnAttack(InputAction.CallbackContext context)
     {
+        if (context.started)
+            attackPressed = true;
+
+        // Your existing attack logic...
         if (context.started)
         {
             animator.SetTrigger(AnimationStrings.attackTrigger);
