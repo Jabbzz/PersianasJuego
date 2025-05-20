@@ -4586,7 +4586,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundEffectSource: {fileID: 1785631740}
   musicSource: {fileID: 1785631742}
-  ambientMusic: {fileID: 8300000, guid: 488c0fc4f3e84fe4889a76255c3b568a, type: 3}
+  ambientMusicNivel1: {fileID: 8300000, guid: 488c0fc4f3e84fe4889a76255c3b568a, type: 3}
+  ambientMusicNivel2: {fileID: 8300000, guid: 4b011b04e0b81ee4db9e81368cebd7ec, type: 3}
+  ambientMusicNivel3: {fileID: 8300000, guid: 32ae1cbbf8e458340a84f79566701cd0, type: 3}
 --- !u!82 &1785631740
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4600,7 +4602,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4712,7 +4714,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
