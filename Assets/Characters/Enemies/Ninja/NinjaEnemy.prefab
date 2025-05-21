@@ -627,6 +627,12 @@ MonoBehaviour:
   attackZone: {fileID: 2833608234969790656}
   cliffDectionZone: {fileID: 7448244710064609005}
   chaseZone: {fileID: 9210107548561787582}
+  walkSound: {fileID: 8300000, guid: 7be4a757db18e244ca28f451c96fd5fb, type: 3}
+  runSound: {fileID: 8300000, guid: 7be4a757db18e244ca28f451c96fd5fb, type: 3}
+  attackSound: {fileID: 8300000, guid: b5b3d547dabd091499213671654df191, type: 3}
+  deathSound: {fileID: 8300000, guid: 694c6283f7c1bd746b45197a50ca4bbe, type: 3}
+  hitSound: {fileID: 8300000, guid: e97a745e1e1a96340a9afc053d09bc27, type: 3}
+  footstepCooldown: 0.4
   flipDelay: 0.5
   _hasTarget: 0
 --- !u!95 &5299197218343630469

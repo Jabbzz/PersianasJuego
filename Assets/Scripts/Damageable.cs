@@ -76,18 +76,24 @@ public class Damageable : MonoBehaviour
 
     public bool Hit(int damage, Vector2 knockback)
     {
+        bool isPlayer = gameObject.CompareTag("Player");
         if (IsAlive && !isInvincible)
         {
             Health -= damage;
             isInvincible = true;
 
+            if (isPlayer)
+            {
+                lifeManager.instance.LoseLife(true);
+            }
+            
             animator.SetTrigger(AnimationStrings.hitTrigger);
             LockVelocity = true;
             //Notify other components that the damageable was hit to handle knockback
             damageableHit?.Invoke(damage, knockback);
 
             return true;
-            
+
         }
         return false;
     }

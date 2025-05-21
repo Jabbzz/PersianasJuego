@@ -5,6 +5,9 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem; // Import the InputSystem namespace
+using UnityEngine.SceneManagement;
+
+
 
 [System.Serializable]
 public struct InputSnapshot
@@ -176,6 +179,19 @@ public class Playercontroller : MonoBehaviour
 
     protected Vector2 moveInput; // Variable to store the movement input
     protected Animator animator; // Variable to store the Animator component
+    [SerializeField] private AudioClip walkSound;
+    [SerializeField] private AudioClip runSound;
+    [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private AudioClip climbSound;
+    [SerializeField] private AudioClip attackSound;
+    [SerializeField] private AudioClip hitSound;
+    [SerializeField] private AudioClip landSound;
+    [SerializeField] private AudioClip deathSound;
+
+    private bool wasGroundedLastFrame = false;
+
+    private bool canPlayFootstep = true;
+    [SerializeField] private float footstepCooldown = 0.4f;
 
     private void Awake()
     {
@@ -194,10 +210,29 @@ public class Playercontroller : MonoBehaviour
     }
 
     // Update is called once per frame
+    private bool wasAliveLastFrame = true;
     void Update()
     {
-        UpdateLedgeDetectorPosition(); // Always keep ledge detector on correct side
+        if (wasAliveLastFrame && !IsAlive)
+        {
+            if (deathSound != null)
+            {
+                audioManager.instance.PlaySound(deathSound);
+            }
+
+            // Reiniciar escena tras la muerte
+            StartCoroutine(ReloadSceneAfterDelay(1.5f));
+        }
+
+        wasAliveLastFrame = IsAlive;
     }
+
+    private IEnumerator ReloadSceneAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
 
     void FixedUpdate()
     {
@@ -210,6 +245,22 @@ public class Playercontroller : MonoBehaviour
         {
             EnterLedgeHang();
         }
+
+        if (touchingDirections.IsGrounded && IsMoving && !isHanging && canPlayFootstep)
+        {
+            PlayFootstepSound();
+        }
+
+        if (!wasGroundedLastFrame && touchingDirections.IsGrounded)
+        {
+            if (landSound != null)
+            {
+                audioManager.instance.PlaySound(landSound);
+            }
+        }
+
+        wasGroundedLastFrame = touchingDirections.IsGrounded;
+
 
 
         //time manipulation
@@ -305,6 +356,11 @@ public class Playercontroller : MonoBehaviour
         {
             animator.SetTrigger(AnimationStrings.jumpTrigger);
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulse);
+
+            if (jumpSound != null)
+            {
+                audioManager.instance.PlaySound(jumpSound);
+            }
         }
     }
 
@@ -317,6 +373,11 @@ public class Playercontroller : MonoBehaviour
         if (context.started)
         {
             animator.SetTrigger(AnimationStrings.attackTrigger);
+
+            if (attackSound != null)
+            {
+                audioManager.instance.PlaySound(attackSound);
+            }
         }
     }
 
@@ -324,6 +385,11 @@ public class Playercontroller : MonoBehaviour
     public void OnHit(int damage, Vector2 knockback)
     {
         rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
+
+        if (hitSound != null)
+        {
+            audioManager.instance.PlaySound(hitSound);
+        }
     }
 
     void CheckForLedge()
@@ -365,7 +431,14 @@ public class Playercontroller : MonoBehaviour
 
     IEnumerator ClimbUp()
     {
-        yield return new WaitForSeconds(0.3f); // simulate climb time
+        animator.SetTrigger(AnimationStrings.climbUp); // optional
+
+        if (climbSound != null)
+        {
+            audioManager.instance.PlaySound(climbSound);
+        }
+
+        yield return new WaitForSeconds(0.1f); // simulate climb time
 
         ExitLedgeHang(); // reset states
 
@@ -424,6 +497,25 @@ public class Playercontroller : MonoBehaviour
         canDash = true;
     }
 
+    private void PlayFootstepSound()
+    {
+        AudioClip clipToPlay = IsRunning ? runSound : walkSound;
+        if (clipToPlay != null)
+        {
+            audioManager.instance.PlaySound(clipToPlay);
+        }
+
+        StartCoroutine(FootstepCooldownRoutine());
+    }
+
+    private IEnumerator FootstepCooldownRoutine()
+    {
+        canPlayFootstep = false;
+        yield return new WaitForSeconds(footstepCooldown);
+        canPlayFootstep = true;
+    }
+
+
     private void OnDrawGizmosSelected()
     {
         if (ledgeDetectorTransform != null)
@@ -437,5 +529,21 @@ public class Playercontroller : MonoBehaviour
             Gizmos.color = Color.yellow;
             Gizmos.DrawSphere(snapPos, 0.05f);
         }
+    }
+    
+    public void ResetPlayer()
+{
+    // Reinicia posición, salud, estados, animaciones, etc.
+    transform.position = Vector3.zero; // O la posición inicial que prefieras
+    damageable.Health = damageable.MaxHealth;
+    lifeManager.instance.currentLives = lifeManager.instance.maxLives;
+    lifeManager.instance.UpdateUI();
+
+    // Rehabilitar variables necesarias
+    animator.SetBool(AnimationStrings.isAlive, true);
+    // Otros resets que necesites...
+
+    Debug.Log("Player reiniciado");
 }
+
 }
