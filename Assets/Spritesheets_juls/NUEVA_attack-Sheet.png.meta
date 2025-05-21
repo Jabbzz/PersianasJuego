@@ -1,17 +1,13 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/TextMesh Pro/Examples & Extras/Textures/Sunny Days - Seamless.jpg.meta
-guid: 17c350171f7a3ca479f830547c66d187
-========
-guid: 6cdece9b1e3e6954e97275290609f156
->>>>>>>> main:Assets/Spritesheets_juls/NUEVA_Ledge_climb-Sheet.png.meta
+guid: e0076e3a9e080594cb6146d0c32cfabb
 TextureImporter:
-  fileIDToRecycleName: {}
+  internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
-    sRGBTexture: 0
+    sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
@@ -24,66 +20,69 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
   seamlessCubemap: 0
-  textureFormat: -1
+  textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: 16
-    mipBias: -100
-    wrapU: 0
-    wrapV: 0
-    wrapW: 0
-  nPOTScale: 1
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-<<<<<<<< HEAD:Assets/TextMesh Pro/Examples & Extras/Textures/Sunny Days - Seamless.jpg.meta
-  spriteMode: 0
-========
   spriteMode: 2
->>>>>>>> main:Assets/Spritesheets_juls/NUEVA_Ledge_climb-Sheet.png.meta
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-<<<<<<<< HEAD:Assets/TextMesh Pro/Examples & Extras/Textures/Sunny Days - Seamless.jpg.meta
-  spritePixelsToUnits: 100
-========
   spritePixelsToUnits: 32
->>>>>>>> main:Assets/Spritesheets_juls/NUEVA_Ledge_climb-Sheet.png.meta
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 512
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
     buildTarget: Standalone
-    maxTextureSize: 512
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -91,10 +90,12 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
     buildTarget: Android
-    maxTextureSize: 512
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -102,21 +103,12 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: Windows Store Apps
-    maxTextureSize: 512
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
     buildTarget: WebGL
-    maxTextureSize: 512
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -124,174 +116,212 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
-<<<<<<<< HEAD:Assets/TextMesh Pro/Examples & Extras/Textures/Sunny Days - Seamless.jpg.meta
-  spriteSheet:
-    serializedVersion: 2
-    sprites: []
-========
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: NUEVA_Ledge_climb-Sheet_0
+      name: NUEVA_attack-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 103
-        height: 168
+        width: 128
+        height: 143
       alignment: 9
-      pivot: {x: 0.5271224, y: 0.39025158}
+      pivot: {x: 0.38, y: 0.43}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0440cb1e69a47da4f990e9c65dec0c50
-      internalID: -1687207144
+      spriteID: 3cc830f7cb239644397ce2cb309f6486
+      internalID: -585812065
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NUEVA_Ledge_climb-Sheet_1
+      name: NUEVA_attack-Sheet_1
       rect:
         serializedVersion: 2
-        x: 103
+        x: 128
         y: 0
-        width: 103
-        height: 168
+        width: 128
+        height: 143
       alignment: 9
-      pivot: {x: 0.53797126, y: 0.40022874}
+      pivot: {x: 0.38, y: 0.43}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c885e5938d0986244b3dee35ad098e2d
-      internalID: 1504466586
+      spriteID: 017b3452020400342b39ed9a94c58680
+      internalID: -864350765
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NUEVA_Ledge_climb-Sheet_2
+      name: NUEVA_attack-Sheet_2
       rect:
         serializedVersion: 2
-        x: 206
+        x: 256
         y: 0
-        width: 103
-        height: 168
+        width: 128
+        height: 143
       alignment: 9
-      pivot: {x: 0.53797156, y: 0.490023}
+      pivot: {x: 0.38, y: 0.43}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e45012a98f4070e45a9d15b8ee253b31
-      internalID: -651232615
+      spriteID: 799e02baae461a94d82dfbf2f3717813
+      internalID: 511833855
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NUEVA_Ledge_climb-Sheet_3
+      name: NUEVA_attack-Sheet_3
       rect:
         serializedVersion: 2
-        x: 309
+        x: 384
         y: 0
-        width: 103
-        height: 168
+        width: 128
+        height: 143
       alignment: 9
-      pivot: {x: 0.543396, y: 0.5964458}
+      pivot: {x: 0.38, y: 0.43}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b9c35b9684b7604e919ec23f7d58e67
-      internalID: -1586113633
+      spriteID: 10c6dd66627f597458241bad645081ec
+      internalID: 370096612
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NUEVA_Ledge_climb-Sheet_4
+      name: NUEVA_attack-Sheet_4
       rect:
         serializedVersion: 2
-        x: 412
+        x: 512
         y: 0
-        width: 103
-        height: 168
+        width: 128
+        height: 143
       alignment: 9
-      pivot: {x: 0.5325469, y: 0.64300585}
+      pivot: {x: 0.38, y: 0.43}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c2f80bbf6e41f3a4c91e5bd97593a560
-      internalID: 982441313
+      spriteID: e9a231da62027414295bd5736dcb2d1f
+      internalID: -659243428
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NUEVA_Ledge_climb-Sheet_5
+      name: NUEVA_attack-Sheet_5
       rect:
         serializedVersion: 2
-        x: 515
+        x: 640
         y: 0
-        width: 103
-        height: 168
+        width: 128
+        height: 143
       alignment: 9
-      pivot: {x: 0.52712274, y: 0.629703}
+      pivot: {x: 0.38, y: 0.43}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6c2ea09a33bf0d549976432afb040c72
-      internalID: 1985077183
+      spriteID: 320b467879245074c9557beb13b390bc
+      internalID: 144343725
       vertices: []
       indices: 
       edges: []
       weights: []
->>>>>>>> main:Assets/Spritesheets_juls/NUEVA_Ledge_climb-Sheet.png.meta
+    - serializedVersion: 2
+      name: NUEVA_attack-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 128
+        height: 143
+      alignment: 9
+      pivot: {x: 0.38, y: 0.43}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ae5633cb602f52429d3a66ccb29e5cc
+      internalID: -1486721946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NUEVA_attack-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 0
+        width: 128
+        height: 143
+      alignment: 9
+      pivot: {x: 0.38, y: 0.43}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16b899c6c3d9a0a4b959b8047d4557dd
+      internalID: -1052828263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
+    customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
-<<<<<<<< HEAD:Assets/TextMesh Pro/Examples & Extras/Textures/Sunny Days - Seamless.jpg.meta
-  spritePackingTag: 
-========
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      NUEVA_Ledge_climb-Sheet_0: -1687207144
-      NUEVA_Ledge_climb-Sheet_1: 1504466586
-      NUEVA_Ledge_climb-Sheet_2: -651232615
-      NUEVA_Ledge_climb-Sheet_3: -1586113633
-      NUEVA_Ledge_climb-Sheet_4: 982441313
-      NUEVA_Ledge_climb-Sheet_5: 1985077183
+      NUEVA_attack-Sheet_0: -585812065
+      NUEVA_attack-Sheet_1: -864350765
+      NUEVA_attack-Sheet_2: 511833855
+      NUEVA_attack-Sheet_3: 370096612
+      NUEVA_attack-Sheet_4: -659243428
+      NUEVA_attack-Sheet_5: 144343725
+      NUEVA_attack-Sheet_6: -1486721946
+      NUEVA_attack-Sheet_7: -1052828263
   mipmapLimitGroupName: 
->>>>>>>> main:Assets/Spritesheets_juls/NUEVA_Ledge_climb-Sheet.png.meta
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
