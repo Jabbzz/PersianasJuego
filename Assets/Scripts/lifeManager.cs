@@ -52,6 +52,10 @@ public class lifeManager : MonoBehaviour
         // Reasignar referencias de UI al cargar nueva escena
         ReassignUIReferences();
         InitializeLives();
+        if (SceneManager.GetActiveScene().name == "Creditos")
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void ReassignUIReferences()

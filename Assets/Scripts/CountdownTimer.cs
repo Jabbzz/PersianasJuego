@@ -56,6 +56,10 @@ public class CountdownTimerManager : MonoBehaviour
         EnsureTimerExists();
         FindUIReferences();
         ResetTimer();
+        if (SceneManager.GetActiveScene().name == "Creditos")
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void EnsureTimerExists()
