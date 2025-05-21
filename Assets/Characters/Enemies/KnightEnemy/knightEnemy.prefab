@@ -178,6 +178,13 @@ MonoBehaviour:
   attackZone: {fileID: 4433910639508164369}
   cliffDectionZone: {fileID: 5565778265587252174}
   chaseZone: {fileID: 5973696659048233267}
+  walkSound: {fileID: 8300000, guid: a849ca302c2c23647b0548b4ce31b430, type: 3}
+  runSound: {fileID: 8300000, guid: a849ca302c2c23647b0548b4ce31b430, type: 3}
+  attackSound: {fileID: 8300000, guid: f5e26bc1dfa097b40b05c9632bb5bdcb, type: 3}
+  deathSound: {fileID: 8300000, guid: bd834c5e19f8ef644949313e112cbb0d, type: 3}
+  hitSound: {fileID: 8300000, guid: e97a745e1e1a96340a9afc053d09bc27, type: 3}
+  monsterSound: {fileID: 8300000, guid: b2c7adf9daaf5c74bb9b02a3b678c43e, type: 3}
+  footstepCooldown: 0.4
   flipDelay: 0.5
   _hasTarget: 0
 --- !u!114 &7010174653639582749
@@ -532,7 +539,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.1288341, y: 0.14055276}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -542,7 +549,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.257668, y: 1.2811055}
   m_EdgeRadius: 0
 --- !u!114 &5565778265587252174
 MonoBehaviour:

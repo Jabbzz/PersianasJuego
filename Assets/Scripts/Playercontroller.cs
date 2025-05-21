@@ -239,10 +239,51 @@ public class Playercontroller : MonoBehaviour
 
     void FixedUpdate()
     {
+        /*
         if (!damageable.LockVelocity && !isDashing)
             rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
         animator.SetFloat(AnimationStrings.yVelocity, rb.linearVelocity.y); //makes the character fall/rise
+        */
+        if (!damageable.LockVelocity && !isDashing)
+        {
+            Vector2 velocity = rb.linearVelocity;
 
+            // Define raycast origin (feet position)
+            Vector2 rayOrigin = (Vector2)transform.position + Vector2.down * 0.1f;
+
+            // Cast a short ray downward to detect the ground
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, 2f, LayerMask.GetMask("Ground"));
+
+            Debug.DrawRay(rayOrigin, Vector2.down * 0.5f, Color.red); // For debugging
+
+            if (hit.collider != null && Mathf.Abs(hit.normal.x) > 0.01f && moveInput.x != 0)
+            {
+                float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
+
+                if (slopeAngle > 0.01f && slopeAngle < 60f)
+                {
+                    Vector2 slopeTangent = new Vector2(hit.normal.y, -hit.normal.x);
+                    slopeTangent.Normalize();
+
+                    float moveDir = Mathf.Sign(moveInput.x);
+                    Vector2 slopeVelocity = slopeTangent * moveDir * CurrentMoveSpeed;
+
+                    // Preserve y velocity if airborne
+                    if (rb.linearVelocity.y > 0.1f || !touchingDirections.IsGrounded)
+                    {
+                        slopeVelocity.y = rb.linearVelocity.y;
+                    }
+
+                    rb.linearVelocity = slopeVelocity;
+                    return;
+                }
+            }
+            else
+            {
+                // Fallback to horizontal movement if no ground underfoot or on flat ground
+                rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
+            }
+        }
 
         if (!isHanging && !touchingDirections.IsGrounded && ledgeDetector.ledgeAvailable)
         {
