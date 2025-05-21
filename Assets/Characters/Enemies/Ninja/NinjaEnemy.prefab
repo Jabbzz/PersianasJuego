@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 10
-  knockback: {x: 0, y: 0}
+  knockback: {x: 5, y: 0}
 --- !u!1 &2584382567926697278
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,7 +481,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1938035691, guid: a447ef2901a09c44c96e67b44dd68cb2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -556,7 +556,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &3993182743886384808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,14 +571,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   castFilter:
     useTriggers: 0
-    useLayerMask: 0
+    useLayerMask: 1
     useDepth: 0
     useOutsideDepth: 0
     useNormalAngle: 0
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 64
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
@@ -623,6 +623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkStopRate: 0.6
   walkSpeed: 3
+  stopDistance: 4
   attackZone: {fileID: 2833608234969790656}
   cliffDectionZone: {fileID: 7448244710064609005}
   chaseZone: {fileID: 9210107548561787582}

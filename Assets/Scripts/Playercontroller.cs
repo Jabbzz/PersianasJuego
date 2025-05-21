@@ -1,13 +1,40 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem; // Import the InputSystem namespace
+
+[System.Serializable]
+public struct InputSnapshot
+{
+    public Vector2 move;
+    public bool jump;
+    public bool run;
+    public bool attack;
+
+    public InputSnapshot(Vector2 move, bool jump, bool run, bool attack)
+    {
+        this.move = move;
+        this.jump = jump;
+        this.run = run;
+        this.attack = attack;
+    }
+}
+
+
+
+
+
+
+
+
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections), typeof(Damageable)),] // Require a Rigidbody2D component on the GameObject
 public class Playercontroller : MonoBehaviour
 {
-    Rigidbody2D rb;
-    TouchingDirections touchingDirections;
+    protected Rigidbody2D rb;
+    protected TouchingDirections touchingDirections;
 
     public float walkSpeed = 5f;
     public float airWalkSpeed = 3f;
@@ -24,6 +51,18 @@ public class Playercontroller : MonoBehaviour
     private Color originalColor;
 
 
+
+    //cositas para manipulacion del tiempo
+    public float inputRecordDuration = 2f;
+    public float inputSnapshotInterval = 0.1f;
+    private float inputSnapshotTimer = 0f;
+
+    private List<InputSnapshot> inputHistory = new List<InputSnapshot>();
+
+    private bool jumpPressed = false;
+    protected private bool runHeld = false;
+    private bool attackPressed = false;
+    public GameObject ghostClonePrefab;
 
     private LedgeDetector ledgeDetector;
     public bool isHanging = false;
@@ -42,7 +81,7 @@ public class Playercontroller : MonoBehaviour
         {
             return _isMoving; // Return the value of isMoving
         }
-        private set
+        protected private set
         {
             _isMoving = value; // Set the value of isMoving
             animator.SetBool(AnimationStrings.isMoving, value); // Set the animator parameter "isMoving" based on the value
@@ -56,7 +95,7 @@ public class Playercontroller : MonoBehaviour
         {
             return _isRunning; // Return the value of isRunning
         }
-        private set
+        protected private set
         {
             _isRunning = value; // Set the value of isRunning
             animator.SetBool(AnimationStrings.isRunning, value); // Set the animator parameter "isRunning" based on the value
@@ -135,8 +174,8 @@ public class Playercontroller : MonoBehaviour
     }
 
 
-    Vector2 moveInput; // Variable to store the movement input
-    Animator animator; // Variable to store the Animator component
+    protected Vector2 moveInput; // Variable to store the movement input
+    protected Animator animator; // Variable to store the Animator component
 
     private void Awake()
     {
@@ -157,7 +196,7 @@ public class Playercontroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        UpdateLedgeDetectorPosition(); // Always keep ledge detector on correct side
     }
 
     void FixedUpdate()
@@ -171,9 +210,27 @@ public class Playercontroller : MonoBehaviour
         {
             EnterLedgeHang();
         }
+
+
+        //time manipulation
+        inputSnapshotTimer += Time.fixedDeltaTime;
+        if (inputSnapshotTimer >= inputSnapshotInterval)
+        {
+            inputSnapshotTimer = 0f;
+
+            inputHistory.Add(new InputSnapshot(moveInput, jumpPressed, runHeld, attackPressed));
+
+            // Reset one-time triggers
+            jumpPressed = false;
+            attackPressed = false;
+
+            // Trim to fit duration
+            if (inputHistory.Count > inputRecordDuration / inputSnapshotInterval)
+                inputHistory.RemoveAt(0);
+        }
     }
 
-    public void OnMove(InputAction.CallbackContext context)
+    public virtual void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
         if (IsAlive)
@@ -184,7 +241,24 @@ public class Playercontroller : MonoBehaviour
         }
     }
 
-    private void SetFacingDirection(Vector2 moveInput)
+    public void OnSpawnClone(InputAction.CallbackContext context)
+    {
+        if (context.started && inputHistory.Count > 0)
+        {
+            GameObject ghost = Instantiate(ghostClonePrefab, transform.position, Quaternion.identity);
+            GhostPlayerController ghostScript = ghost.GetComponent<GhostPlayerController>();
+            ghostScript.InitReplay(inputHistory);
+        }
+
+         // Trigger the impulse
+        CinemachineImpulseSource impulse = GetComponent<CinemachineImpulseSource>();
+        if (impulse != null)
+        {
+            impulse.GenerateImpulse();
+        }
+    }
+
+    protected private void SetFacingDirection(Vector2 moveInput)
     {
         //Facing right
         if (moveInput.x > 0 && !isFacingRight)
@@ -200,8 +274,10 @@ public class Playercontroller : MonoBehaviour
         }
     }
 
-    public void OnRun(InputAction.CallbackContext context)
+    public virtual void OnRun(InputAction.CallbackContext context)
     {
+        runHeld = context.ReadValueAsButton(); // true when held down
+        // Your existing run logic...
         if (context.started)
         {
             IsRunning = true;
@@ -212,12 +288,17 @@ public class Playercontroller : MonoBehaviour
         }
     }
 
-    public void OnJump(InputAction.CallbackContext context)
+    public virtual void OnJump(InputAction.CallbackContext context)
     {
+        if (context.started)
+            jumpPressed = true;
+
+        // Your existing jump logic...
         if (!IsAlive)
             return;
         if (isHanging)
         {
+            animator.SetTrigger(AnimationStrings.climbUp); // optional
             StartCoroutine(ClimbUp());
         }
         else if (context.started && touchingDirections.IsGrounded && CanMove)
@@ -226,8 +307,13 @@ public class Playercontroller : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulse);
         }
     }
-    public void OnAttack(InputAction.CallbackContext context)
+
+    public virtual void OnAttack(InputAction.CallbackContext context)
     {
+        if (context.started)
+            attackPressed = true;
+
+        // Your existing attack logic...
         if (context.started)
         {
             animator.SetTrigger(AnimationStrings.attackTrigger);
@@ -254,8 +340,13 @@ public class Playercontroller : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         rb.gravityScale = 0;
 
-        // Snap to ledge position
-        Vector3 snapPos = ledgeDetector.transform.position + (Vector3)ledgeHangOffset;
+        // Snap to ledge position, accounting for facing direction
+        //
+        Vector3 snapPos = ledgeDetector.transform.position + new Vector3(
+            ledgeHangOffset.x * (isFacingRight ? 1 : -1),
+            ledgeHangOffset.y,
+            0f
+        );
         transform.position = new Vector3(
             Mathf.Round(snapPos.x * 16) / 16f,
             Mathf.Round(snapPos.y * 16) / 16f,
@@ -274,23 +365,25 @@ public class Playercontroller : MonoBehaviour
 
     IEnumerator ClimbUp()
     {
-        animator.SetTrigger(AnimationStrings.climbUp); // optional
-        yield return new WaitForSeconds(0.1f); // simulate climb time
+        yield return new WaitForSeconds(0.3f); // simulate climb time
 
         ExitLedgeHang(); // reset states
 
         // Snap player to stand on the ledge
-        transform.position += new Vector3(0, 1f, 0);
+        float direction = isFacingRight ? 0.5f : -0.5f;
+        transform.position += new Vector3(direction, 1f, 0);
     }
 
     private void UpdateLedgeDetectorPosition()
     {
         float direction = isFacingRight ? 1 : -1;
-        ledgeDetectorTransform.localPosition = new Vector3(
+        Vector3 newPos = new Vector3(
             ledgeDetectorOffset.x * direction,
             ledgeDetectorOffset.y,
             ledgeDetectorTransform.localPosition.z
         );
+        ledgeDetectorTransform.localPosition = newPos;
+        Debug.Log($"LedgeDetector localPosition: {ledgeDetectorTransform.localPosition}, isFacingRight: {isFacingRight}");
     }
 
     public void OnDash(InputAction.CallbackContext context)
@@ -323,7 +416,6 @@ public class Playercontroller : MonoBehaviour
         rb.gravityScale = originalGravity;
         isDashing = false;
 
-        // Optional: reset time scale
         Time.timeScale = 1f;
         Time.fixedDeltaTime = 0.02f;
         spriteRenderer.color = originalColor;
@@ -332,4 +424,18 @@ public class Playercontroller : MonoBehaviour
         canDash = true;
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        if (ledgeDetectorTransform != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(ledgeDetectorTransform.position, 0.05f);
+
+            // Show ledge snap position based on facing direction and offset
+            float direction = _isFacingRight ? 1f : -1f;
+            Vector3 snapPos = ledgeDetectorTransform.position + new Vector3(ledgeHangOffset.x * direction, ledgeHangOffset.y, 0f);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawSphere(snapPos, 0.05f);
+        }
+}
 }

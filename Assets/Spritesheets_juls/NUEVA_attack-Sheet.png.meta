@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 423b4f4d38db78f438b0abe2ca3fd44c
+guid: e0076e3a9e080594cb6146d0c32cfabb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,133 +123,177 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ledge_climb_0
+      name: NUEVA_attack-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 103
-        height: 168
+        width: 128
+        height: 143
       alignment: 9
-      pivot: {x: 0.5264606, y: 0.39311996}
+      pivot: {x: 0.38, y: 0.43}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38ab19468772e534fa3b9e1f75952a2c
-      internalID: 1469169051
+      spriteID: 3cc830f7cb239644397ce2cb309f6486
+      internalID: -585812065
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ledge_climb_1
+      name: NUEVA_attack-Sheet_1
       rect:
         serializedVersion: 2
-        x: 103
+        x: 128
         y: 0
-        width: 103
-        height: 168
+        width: 128
+        height: 143
       alignment: 9
-      pivot: {x: 0.52490413, y: 0.3969371}
+      pivot: {x: 0.38, y: 0.43}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9ef7e5d41e289f044b9ef5d9a475336c
-      internalID: 907695130
+      spriteID: 017b3452020400342b39ed9a94c58680
+      internalID: -864350765
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ledge_climb_2
+      name: NUEVA_attack-Sheet_2
       rect:
         serializedVersion: 2
-        x: 206
+        x: 256
         y: 0
-        width: 103
-        height: 168
+        width: 128
+        height: 143
       alignment: 9
-      pivot: {x: 0.5311303, y: 0.49141145}
+      pivot: {x: 0.38, y: 0.43}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb32529079ad1704a8ed848aa430015f
-      internalID: 344712129
+      spriteID: 799e02baae461a94d82dfbf2f3717813
+      internalID: 511833855
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ledge_climb_3
+      name: NUEVA_attack-Sheet_3
       rect:
         serializedVersion: 2
-        x: 309
+        x: 384
         y: 0
-        width: 103
-        height: 168
+        width: 128
+        height: 143
       alignment: 9
-      pivot: {x: 0.5357998, y: 0.6049715}
+      pivot: {x: 0.38, y: 0.43}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b46dcab62e92f154fb154b5384b8730a
-      internalID: 1812055094
+      spriteID: 10c6dd66627f597458241bad645081ec
+      internalID: 370096612
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ledge_climb_4
+      name: NUEVA_attack-Sheet_4
       rect:
         serializedVersion: 2
-        x: 412
+        x: 512
         y: 0
-        width: 103
-        height: 168
+        width: 128
+        height: 143
       alignment: 9
-      pivot: {x: 0.5389129, y: 0.6469601}
+      pivot: {x: 0.38, y: 0.43}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e4bfb98841e55e41abe104606324bf6
-      internalID: -1180346423
+      spriteID: e9a231da62027414295bd5736dcb2d1f
+      internalID: -659243428
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ledge_climb_5
+      name: NUEVA_attack-Sheet_5
       rect:
         serializedVersion: 2
-        x: 515
+        x: 640
         y: 0
-        width: 103
-        height: 168
+        width: 128
+        height: 143
       alignment: 9
-      pivot: {x: 0.5404693, y: 0.6584115}
+      pivot: {x: 0.38, y: 0.43}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d1f2cb1e1ec28b4b854d06c483a1196
-      internalID: -322552392
+      spriteID: 320b467879245074c9557beb13b390bc
+      internalID: 144343725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NUEVA_attack-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 128
+        height: 143
+      alignment: 9
+      pivot: {x: 0.38, y: 0.43}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ae5633cb602f52429d3a66ccb29e5cc
+      internalID: -1486721946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NUEVA_attack-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 0
+        width: 128
+        height: 143
+      alignment: 9
+      pivot: {x: 0.38, y: 0.43}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16b899c6c3d9a0a4b959b8047d4557dd
+      internalID: -1052828263
       vertices: []
       indices: 
       edges: []
@@ -268,12 +312,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Ledge_climb_0: 1469169051
-      Ledge_climb_1: 907695130
-      Ledge_climb_2: 344712129
-      Ledge_climb_3: 1812055094
-      Ledge_climb_4: -1180346423
-      Ledge_climb_5: -322552392
+      NUEVA_attack-Sheet_0: -585812065
+      NUEVA_attack-Sheet_1: -864350765
+      NUEVA_attack-Sheet_2: 511833855
+      NUEVA_attack-Sheet_3: 370096612
+      NUEVA_attack-Sheet_4: -659243428
+      NUEVA_attack-Sheet_5: 144343725
+      NUEVA_attack-Sheet_6: -1486721946
+      NUEVA_attack-Sheet_7: -1052828263
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

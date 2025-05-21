@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 423b4f4d38db78f438b0abe2ca3fd44c
+guid: d69301467e384154ba673a39bd5c6114
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -119,137 +119,40 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ledge_climb_0
+      name: face_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 103
-        height: 168
-      alignment: 9
-      pivot: {x: 0.5264606, y: 0.39311996}
+        width: 290
+        height: 287
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 38ab19468772e534fa3b9e1f75952a2c
-      internalID: 1469169051
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ledge_climb_1
-      rect:
-        serializedVersion: 2
-        x: 103
-        y: 0
-        width: 103
-        height: 168
-      alignment: 9
-      pivot: {x: 0.52490413, y: 0.3969371}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9ef7e5d41e289f044b9ef5d9a475336c
-      internalID: 907695130
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ledge_climb_2
-      rect:
-        serializedVersion: 2
-        x: 206
-        y: 0
-        width: 103
-        height: 168
-      alignment: 9
-      pivot: {x: 0.5311303, y: 0.49141145}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eb32529079ad1704a8ed848aa430015f
-      internalID: 344712129
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ledge_climb_3
-      rect:
-        serializedVersion: 2
-        x: 309
-        y: 0
-        width: 103
-        height: 168
-      alignment: 9
-      pivot: {x: 0.5357998, y: 0.6049715}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b46dcab62e92f154fb154b5384b8730a
-      internalID: 1812055094
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ledge_climb_4
-      rect:
-        serializedVersion: 2
-        x: 412
-        y: 0
-        width: 103
-        height: 168
-      alignment: 9
-      pivot: {x: 0.5389129, y: 0.6469601}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4e4bfb98841e55e41abe104606324bf6
-      internalID: -1180346423
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ledge_climb_5
-      rect:
-        serializedVersion: 2
-        x: 515
-        y: 0
-        width: 103
-        height: 168
-      alignment: 9
-      pivot: {x: 0.5404693, y: 0.6584115}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1d1f2cb1e1ec28b4b854d06c483a1196
-      internalID: -322552392
+      spriteID: 9473bf86267de54c0800000000000000
+      internalID: -4296760176796813495
       vertices: []
       indices: 
       edges: []
@@ -268,12 +171,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Ledge_climb_0: 1469169051
-      Ledge_climb_1: 907695130
-      Ledge_climb_2: 344712129
-      Ledge_climb_3: 1812055094
-      Ledge_climb_4: -1180346423
-      Ledge_climb_5: -322552392
+      face_0: -4296760176796813495
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
