@@ -8287,14 +8287,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4546717293111613786, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
-      propertyPath: dashSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 12ae73ef829e9eb49bc4d08ea6c36d14, type: 3}
-    - target: {fileID: 4546717293111613786, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
-      propertyPath: cloneSound
-      value: 
-      objectReference: {fileID: 8300000, guid: eeec07c30e93ba643a6b2c1939dc7d42, type: 3}
     - target: {fileID: 4738241158958306253, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
       propertyPath: m_Name
       value: Player (1)
