@@ -6,6 +6,7 @@ TagManager:
   tags:
   - platform
   - enemys
+  - princess
   layers:
   - Default
   - TransparentFX

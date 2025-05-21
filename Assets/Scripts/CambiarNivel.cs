@@ -24,4 +24,5 @@ public class CambiarNivel : MonoBehaviour
             SceneManager.LoadScene(nombreEscenaDestino);
         }
     }
+
 }
