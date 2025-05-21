@@ -166,6 +166,15 @@ MonoBehaviour:
   _isMoving: 0
   _isRunning: 0
   _isFacingRight: 1
+  walkSound: {fileID: 8300000, guid: 7be4a757db18e244ca28f451c96fd5fb, type: 3}
+  runSound: {fileID: 8300000, guid: 7be4a757db18e244ca28f451c96fd5fb, type: 3}
+  jumpSound: {fileID: 8300000, guid: faa9b01b28c7cef448fe50af012fed2f, type: 3}
+  climbSound: {fileID: 8300000, guid: e97a745e1e1a96340a9afc053d09bc27, type: 3}
+  attackSound: {fileID: 8300000, guid: b16eeddb81fe7404584386933087457c, type: 3}
+  hitSound: {fileID: 8300000, guid: df177eca0296a6543b2152d44e0a39aa, type: 3}
+  landSound: {fileID: 8300000, guid: 6fbfaa8b53707944eb52d08becd88b1c, type: 3}
+  deathSound: {fileID: 8300000, guid: 3424852ebc0941f4da0c4855f8c663fc, type: 3}
+  footstepCooldown: 0.4
 --- !u!114 &-3311860719703563236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: 0}
+  m_Actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -327,6 +336,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: dd963883-bf9e-4f21-a10f-f223f3e1a463
     m_ActionName: 'Player/Dash[/DualSenseGamepadHID/buttonEast,/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4546717293111613786}
+        m_TargetAssemblyTypeName: Playercontroller, Assembly-CSharp
+        m_MethodName: OnSpawnClone
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a87860d1-12b1-4699-8bf6-50aff8b23b0e
+    m_ActionName: 'Player/Clone[/Keyboard/c,/DualSenseGamepadHID/rightShoulder,/DualSenseGamepadHID1/rightShoulder]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

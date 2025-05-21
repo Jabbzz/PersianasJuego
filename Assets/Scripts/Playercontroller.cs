@@ -177,8 +177,8 @@ public class Playercontroller : MonoBehaviour
     }
 
 
-    Vector2 moveInput; // Variable to store the movement input
-    Animator animator; // Variable to store the Animator component
+    protected Vector2 moveInput; // Variable to store the movement input
+    protected Animator animator; // Variable to store the Animator component
     [SerializeField] private AudioClip walkSound;
     [SerializeField] private AudioClip runSound;
     [SerializeField] private AudioClip jumpSound;
