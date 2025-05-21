@@ -3,21 +3,25 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-
-
-public class CountdownTimer : MonoBehaviour
+public class CountdownTimerManager : MonoBehaviour
 {
+    // Singleton estático
+    public static CountdownTimerManager Instance { get; private set; }
+
+    [Header("Timer Prefab (optional if this is the prefab itself)")]
+    public GameObject timerPrefab;
+
     [Header("UI References")]
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI timeAddedText;
     public float timeAddedDisplayDuration = 1.5f;
-    
+
     [Header("Timer Settings")]
     public float initialTime = 180f;
     public float warningThreshold = 30f;
     public Color normalColor = Color.white;
     public Color warningColor = Color.red;
-    
+
     private float currentTime;
     private bool isRunning = true;
     private float timeAddedDisplayTimer;
@@ -25,39 +29,55 @@ public class CountdownTimer : MonoBehaviour
 
     private void Awake()
     {
-        // Método actualizado para encontrar objetos del mismo tipo
-        var existingTimers = FindObjectsByType<CountdownTimer>(FindObjectsSortMode.None);
-        if (existingTimers.Length > 1)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
         
+        Instance = this;
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        EnsureTimerExists();
     }
 
     private void OnDestroy()
     {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        if (Instance == this)
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            Instance = null;
+        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        ResetTimer();
+        EnsureTimerExists();
         FindUIReferences();
+        ResetTimer();
+    }
+
+    private void EnsureTimerExists()
+    {
+        if (Instance == null && timerPrefab != null)
+        {
+            GameObject newTimer = Instantiate(timerPrefab);
+            newTimer.name = "CountdownTimer (Auto)";
+        }
+        else if (Instance != null && !Instance.gameObject.activeSelf)
+        {
+            Instance.gameObject.SetActive(true);
+        }
     }
 
     private void FindUIReferences()
     {
         if (timerText == null)
-        {
             timerText = GameObject.Find("TimerText")?.GetComponent<TextMeshProUGUI>();
-        }
+
         if (timeAddedText == null)
-        {
             timeAddedText = GameObject.Find("TimeAddedText")?.GetComponent<TextMeshProUGUI>();
-        }
     }
 
     void Start()
@@ -70,11 +90,9 @@ public class CountdownTimer : MonoBehaviour
         currentTime = initialTime;
         isRunning = true;
         UpdateDisplay();
-        
+
         if (timeAddedText != null)
-        {
             timeAddedText.gameObject.SetActive(false);
-        }
     }
 
     void Update()
@@ -82,7 +100,7 @@ public class CountdownTimer : MonoBehaviour
         if (isRunning)
         {
             currentTime -= Time.deltaTime;
-            
+
             if (currentTime <= 0)
             {
                 currentTime = 0;
@@ -117,34 +135,33 @@ public class CountdownTimer : MonoBehaviour
     }
 
     private void UpdateDisplay()
-{
-    if (timerText == null) return;
-    
-    int minutes = Mathf.FloorToInt(currentTime / 60);
-    int seconds = Mathf.FloorToInt(currentTime % 60);
-    timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-    
-    if (currentTime <= warningThreshold && currentTime > 0)
     {
-        timerText.color = warningColor;
-        // Opcional: Mostrar mensaje adicional
-        if (!isDisplayingTimeAdded) // Para no superponer con otros mensajes
+        if (timerText == null) return;
+
+        int minutes = Mathf.FloorToInt(currentTime / 60);
+        int seconds = Mathf.FloorToInt(currentTime % 60);
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+
+        if (currentTime <= warningThreshold && currentTime > 0)
         {
-            timeAddedText.text = "¡Últimos 30 segundos!";
-            timeAddedText.gameObject.SetActive(true);
-            timeAddedDisplayTimer = 2f; // Mostrar por 2 segundos
-            isDisplayingTimeAdded = true;
+            timerText.color = warningColor;
+
+            if (!isDisplayingTimeAdded)
+            {
+                timeAddedText.text = "¡Últimos 30 segundos!";
+                timeAddedText.gameObject.SetActive(true);
+                timeAddedDisplayTimer = 2f;
+                isDisplayingTimeAdded = true;
+            }
+        }
+        else
+        {
+            timerText.color = normalColor;
         }
     }
-    else
-    {
-        timerText.color = normalColor;
-    }
-}
 
     private void HandleTimeExpired()
     {
-        // Mostrar mensaje de tiempo agotado (opcional)
         if (timeAddedText != null)
         {
             timeAddedText.text = "¡Tiempo agotado!";
@@ -153,16 +170,14 @@ public class CountdownTimer : MonoBehaviour
             isDisplayingTimeAdded = true;
         }
 
-        // Reiniciar la escena actual después de un pequeño delay
         StartCoroutine(ReloadSceneAfterDelay(1.5f));
     }
 
-private IEnumerator ReloadSceneAfterDelay(float delay)
-{
-    yield return new WaitForSeconds(delay);
-    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-}
-
+    private IEnumerator ReloadSceneAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
     public void OnPlayerDeath()
     {
@@ -172,7 +187,7 @@ private IEnumerator ReloadSceneAfterDelay(float delay)
     public void AddTime(float seconds)
     {
         currentTime += seconds;
-        
+
         if (timeAddedText != null)
         {
             timeAddedText.text = $"+{seconds} sec";
