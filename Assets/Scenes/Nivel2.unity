@@ -7371,6 +7371,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -132.1
       objectReference: {fileID: 0}
+    - target: {fileID: 4738241158958306253, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7886307700187278642, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 1175405596516297216, guid: ad4efbdcafc51be439d918d95c65c7d7, type: 3}
       propertyPath: m_LocalPosition.y
       value: -15.3
@@ -7410,22 +7418,6 @@ PrefabInstance:
     - target: {fileID: 8745108258856602214, guid: ad4efbdcafc51be439d918d95c65c7d7, type: 3}
       propertyPath: m_Name
       value: NinjaEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 4738241158958306253, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7886307700187278642, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4738241158958306253, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7886307700187278642, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
-      propertyPath: m_TagString
-      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7539,7 +7531,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -7639,7 +7631,8 @@ MonoBehaviour:
   musicSource: {fileID: 1273688325}
   ambientMusicNivel1: {fileID: 8300000, guid: 488c0fc4f3e84fe4889a76255c3b568a, type: 3}
   ambientMusicNivel2: {fileID: 8300000, guid: 4b011b04e0b81ee4db9e81368cebd7ec, type: 3}
-  ambientMusicNivel3: {fileID: 8300000, guid: 32ae1cbbf8e458340a84f79566701cd0, type: 3}
+  ambientMusicNivel3: {fileID: 8300000, guid: d8139dee6921e234e8639a27e95d6ef6, type: 3}
+  ambientMusicNivel4: {fileID: 8300000, guid: 32ae1cbbf8e458340a84f79566701cd0, type: 3}
 --- !u!82 &1273688327
 AudioSource:
   m_ObjectHideFlags: 0
@@ -56718,6 +56711,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4546717293111613786, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
+      propertyPath: dashSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 12ae73ef829e9eb49bc4d08ea6c36d14, type: 3}
+    - target: {fileID: 4546717293111613786, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
+      propertyPath: cloneSound
+      value: 
+      objectReference: {fileID: 8300000, guid: eeec07c30e93ba643a6b2c1939dc7d42, type: 3}
     - target: {fileID: 4738241158958306253, guid: 62afc1ab1db07634a8bd060a17494987, type: 3}
       propertyPath: m_Name
       value: Player
