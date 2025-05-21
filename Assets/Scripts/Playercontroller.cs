@@ -416,7 +416,6 @@ public class Playercontroller : MonoBehaviour
         rb.gravityScale = originalGravity;
         isDashing = false;
 
-        // Optional: reset time scale
         Time.timeScale = 1f;
         Time.fixedDeltaTime = 0.02f;
         spriteRenderer.color = originalColor;
