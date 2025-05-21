@@ -111,7 +111,7 @@ public class Knight : MonoBehaviour
 
         movementAudioSource = gameObject.AddComponent<AudioSource>();
         movementAudioSource.playOnAwake = false;
-        movementAudioSource.volume = 0.5f;
+        movementAudioSource.volume = 0.02f;
     }
     // Update is called once per frame
     void Update()

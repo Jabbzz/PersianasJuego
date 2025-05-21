@@ -11,6 +11,7 @@ public class audioManager : MonoBehaviour
     public AudioClip ambientMusicNivel1;
     public AudioClip ambientMusicNivel2;
     public AudioClip ambientMusicNivel3;
+    public AudioClip ambientMusicNivel4;
 
     private void Awake()
     {
@@ -60,7 +61,7 @@ public class audioManager : MonoBehaviour
         // Cambiar música según nombre de la escena
         switch (scene.name)
         {
-            case "ExampleScene":
+            case "MainMenu":
                 musicSource.volume = 0.1f;
                 PlayMusic(ambientMusicNivel1);
                 break;
@@ -72,6 +73,10 @@ public class audioManager : MonoBehaviour
                 musicSource.volume = 0.1f;
                 PlayMusic(ambientMusicNivel3);
                 break;
+            case "Nivel3":
+            musicSource.volume = 0.1f;
+            PlayMusic(ambientMusicNivel4);
+            break;
             default:
                 musicSource.Stop();  // O reproducir música por defecto
                 break;

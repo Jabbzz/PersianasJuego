@@ -187,6 +187,9 @@ public class Playercontroller : MonoBehaviour
     [SerializeField] private AudioClip hitSound;
     [SerializeField] private AudioClip landSound;
     [SerializeField] private AudioClip deathSound;
+    [SerializeField] private AudioClip dashSound;
+    [SerializeField] private AudioClip cloneSound;
+
 
     private bool wasGroundedLastFrame = false;
 
@@ -299,6 +302,10 @@ public class Playercontroller : MonoBehaviour
             GameObject ghost = Instantiate(ghostClonePrefab, transform.position, Quaternion.identity);
             GhostPlayerController ghostScript = ghost.GetComponent<GhostPlayerController>();
             ghostScript.InitReplay(inputHistory);
+            if (cloneSound != null)
+            {
+                audioManager.instance.PlaySound(cloneSound);
+            }
         }
 
          // Trigger the impulse
@@ -472,6 +479,8 @@ public class Playercontroller : MonoBehaviour
         isDashing = true;
         canDash = false;
         spriteRenderer.color = new Color(0f, 0.9f, 5f);
+
+        audioManager.instance.PlaySound(dashSound);
 
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0;
